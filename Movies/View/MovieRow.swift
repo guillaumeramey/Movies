@@ -10,30 +10,21 @@ import SwiftUI
 import KingfisherSwiftUI
 
 struct MovieRow: View {
-    var movie: Movie!
+    var movie: Movie
     
     var body: some View {
-        
         HStack {
-            KFImage(URL(string: movie.poster))
-            .resizable()
-            .aspectRatio(contentMode: .fit)
-            .frame(width: 100)
+            KFImage(URL(string: movie.imageUrl))
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(width: 100, height: 100 * 4 / 3)
             
-            VStack(alignment: .leading) {
-                HStack(alignment: .firstTextBaseline) {
-                    Text(movie.title)
-                        .font(.headline)
-                    Text("(\(movie.year))")
-                        .font(.headline)
-                        .fontWeight(.light)
-                }
-                Text(movie.genre ?? "")
-                    .font(.subheadline)
-            }
+            Text(movie.title)
+                .font(.headline)
+                .fontWeight(.regular)
         }
+        .frame(alignment: .leading)
     }
-    
 }
 
 struct MovieRow_Previews: PreviewProvider {

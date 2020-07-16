@@ -14,32 +14,41 @@ struct MovieDetail: View {
     @ObservedObject var networkManager = NetworkManager()
     
     var body: some View {
-        VStack {
+        ScrollView {
             VStack(alignment: .leading) {
-                HStack(alignment: .top) {
-                    Text(movie.title)
-                        .font(.title)
-                        .fontWeight(.medium)
+                
+                Text(movie.title)
+                    .font(.largeTitle)
+                    .fontWeight(.bold)
+                
+                HStack(alignment: .bottom) {
+                    Text(networkManager.movie?.genre ?? "...")
+                        .font(.subheadline)
                     Spacer()
-                    Text("(\(movie.year))")
-                        .font(.title)
-                        .fontWeight(.light)
+                    Text("(\(networkManager.movie?.year ?? "..."))")
+                        .font(.subheadline)
                 }
-                Text(networkManager.movie?.genre ?? "")
-                    .font(.subheadline)
-            }
-            .padding(EdgeInsets(top: 10, leading: 12, bottom: 0, trailing: 12))
-            
-            KFImage(URL(string: movie.poster))
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-
-            Text(networkManager.movie?.plot ?? "")
-                .font(.body)
+                
+                KFImage(URL(string: self.movie.imageUrl))
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .padding(.bottom)
+                
+                HStack(alignment: .top) {
+                    Text("Director: ").fontWeight(.bold)
+                    Text(networkManager.movie?.director ?? "...")
+                }
+                Divider()
+                HStack(alignment: .top) {
+                    Text("Stars: ").fontWeight(.bold)
+                    Text(networkManager.movie?.actors ?? "...")
+                }
+                Divider()
+                Text(networkManager.movie?.plot ?? "...")
+            }.onAppear(perform: getMovie)
                 .padding()
-            
-            Spacer()
-        }.onAppear(perform: getMovie)
+        }.navigationBarTitle(movie.title)
+        
     }
     
     func getMovie() {

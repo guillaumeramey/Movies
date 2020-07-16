@@ -7,6 +7,23 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A411F52424C0CA510031D028 /* Friend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A411F52324C0CA510031D028 /* Friend.swift */; };
+		A411F52624C0CD040031D028 /* FriendList.swift in Sources */ = {isa = PBXBuildFile; fileRef = A411F52524C0CD040031D028 /* FriendList.swift */; };
+		A411F52824C0CE7B0031D028 /* AppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A411F52724C0CE7B0031D028 /* AppView.swift */; };
+		A411F52A24C0D01F0031D028 /* FriendRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = A411F52924C0D01F0031D028 /* FriendRow.swift */; };
+		A411F52C24C0D02E0031D028 /* FriendDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = A411F52B24C0D02E0031D028 /* FriendDetail.swift */; };
+		A411F53324C100420031D028 /* Cookie-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A411F53224C100420031D028 /* Cookie-Regular.ttf */; };
+		A411F53E24C100F90031D028 /* Lato-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A411F53424C100F80031D028 /* Lato-Light.ttf */; };
+		A411F53F24C100F90031D028 /* Lato-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A411F53524C100F80031D028 /* Lato-LightItalic.ttf */; };
+		A411F54024C100F90031D028 /* Lato-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A411F53624C100F80031D028 /* Lato-Bold.ttf */; };
+		A411F54124C100F90031D028 /* Lato-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A411F53724C100F90031D028 /* Lato-Regular.ttf */; };
+		A411F54224C100F90031D028 /* Lato-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A411F53824C100F90031D028 /* Lato-BoldItalic.ttf */; };
+		A411F54324C100F90031D028 /* Lato-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A411F53924C100F90031D028 /* Lato-Italic.ttf */; };
+		A411F54424C100F90031D028 /* Lato-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A411F53A24C100F90031D028 /* Lato-Thin.ttf */; };
+		A411F54524C100F90031D028 /* Lato-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A411F53B24C100F90031D028 /* Lato-Black.ttf */; };
+		A411F54624C100F90031D028 /* Lato-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A411F53C24C100F90031D028 /* Lato-BlackItalic.ttf */; };
+		A411F54724C100F90031D028 /* Lato-ThinItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A411F53D24C100F90031D028 /* Lato-ThinItalic.ttf */; };
+		A411F54A24C105C30031D028 /* ScaledFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = A411F54924C105C30031D028 /* ScaledFont.swift */; };
 		A46B8F2424B0EDC500E4D98E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A46B8F2324B0EDC500E4D98E /* AppDelegate.swift */; };
 		A46B8F2624B0EDC500E4D98E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A46B8F2524B0EDC500E4D98E /* SceneDelegate.swift */; };
 		A46B8F2824B0EDC500E4D98E /* MovieList.swift in Sources */ = {isa = PBXBuildFile; fileRef = A46B8F2724B0EDC500E4D98E /* MovieList.swift */; };
@@ -24,7 +41,24 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		A46B8F2024B0EDC500E4D98E /* Movies.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Movies.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A411F52324C0CA510031D028 /* Friend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Friend.swift; sourceTree = "<group>"; };
+		A411F52524C0CD040031D028 /* FriendList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendList.swift; sourceTree = "<group>"; };
+		A411F52724C0CE7B0031D028 /* AppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppView.swift; sourceTree = "<group>"; };
+		A411F52924C0D01F0031D028 /* FriendRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendRow.swift; sourceTree = "<group>"; };
+		A411F52B24C0D02E0031D028 /* FriendDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendDetail.swift; sourceTree = "<group>"; };
+		A411F53224C100420031D028 /* Cookie-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Cookie-Regular.ttf"; sourceTree = "<group>"; };
+		A411F53424C100F80031D028 /* Lato-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Light.ttf"; sourceTree = "<group>"; };
+		A411F53524C100F80031D028 /* Lato-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-LightItalic.ttf"; sourceTree = "<group>"; };
+		A411F53624C100F80031D028 /* Lato-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Bold.ttf"; sourceTree = "<group>"; };
+		A411F53724C100F90031D028 /* Lato-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Regular.ttf"; sourceTree = "<group>"; };
+		A411F53824C100F90031D028 /* Lato-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-BoldItalic.ttf"; sourceTree = "<group>"; };
+		A411F53924C100F90031D028 /* Lato-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Italic.ttf"; sourceTree = "<group>"; };
+		A411F53A24C100F90031D028 /* Lato-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Thin.ttf"; sourceTree = "<group>"; };
+		A411F53B24C100F90031D028 /* Lato-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Black.ttf"; sourceTree = "<group>"; };
+		A411F53C24C100F90031D028 /* Lato-BlackItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-BlackItalic.ttf"; sourceTree = "<group>"; };
+		A411F53D24C100F90031D028 /* Lato-ThinItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-ThinItalic.ttf"; sourceTree = "<group>"; };
+		A411F54924C105C30031D028 /* ScaledFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaledFont.swift; sourceTree = "<group>"; };
+		A46B8F2024B0EDC500E4D98E /* Moviegram.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Moviegram.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A46B8F2324B0EDC500E4D98E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A46B8F2524B0EDC500E4D98E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		A46B8F2724B0EDC500E4D98E /* MovieList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieList.swift; sourceTree = "<group>"; };
@@ -53,6 +87,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A411F54824C101000031D028 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				A411F53224C100420031D028 /* Cookie-Regular.ttf */,
+				A411F53B24C100F90031D028 /* Lato-Black.ttf */,
+				A411F53C24C100F90031D028 /* Lato-BlackItalic.ttf */,
+				A411F53624C100F80031D028 /* Lato-Bold.ttf */,
+				A411F53824C100F90031D028 /* Lato-BoldItalic.ttf */,
+				A411F53924C100F90031D028 /* Lato-Italic.ttf */,
+				A411F53424C100F80031D028 /* Lato-Light.ttf */,
+				A411F53524C100F80031D028 /* Lato-LightItalic.ttf */,
+				A411F53724C100F90031D028 /* Lato-Regular.ttf */,
+				A411F53A24C100F90031D028 /* Lato-Thin.ttf */,
+				A411F53D24C100F90031D028 /* Lato-ThinItalic.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
 		A46B8F1724B0EDC500E4D98E = {
 			isa = PBXGroup;
 			children = (
@@ -64,7 +116,7 @@
 		A46B8F2124B0EDC500E4D98E /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				A46B8F2024B0EDC500E4D98E /* Movies.app */,
+				A46B8F2024B0EDC500E4D98E /* Moviegram.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -72,7 +124,9 @@
 		A46B8F2224B0EDC500E4D98E /* Movies */ = {
 			isa = PBXGroup;
 			children = (
+				A411F54824C101000031D028 /* Fonts */,
 				A46B8F2324B0EDC500E4D98E /* AppDelegate.swift */,
+				A411F54924C105C30031D028 /* ScaledFont.swift */,
 				A46B8F2524B0EDC500E4D98E /* SceneDelegate.swift */,
 				A46B8F2924B0EDC600E4D98E /* Assets.xcassets */,
 				A46B8F2E24B0EDC600E4D98E /* LaunchScreen.storyboard */,
@@ -108,6 +162,7 @@
 			isa = PBXGroup;
 			children = (
 				A4C62A5C24BCE49E0015092C /* Movie.swift */,
+				A411F52324C0CA510031D028 /* Friend.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -115,9 +170,13 @@
 		A4C62A7324C08E760015092C /* View */ = {
 			isa = PBXGroup;
 			children = (
+				A411F52724C0CE7B0031D028 /* AppView.swift */,
 				A46B8F2724B0EDC500E4D98E /* MovieList.swift */,
 				A4C62A6E24BE18D50015092C /* MovieRow.swift */,
 				A4C62A6224BE094F0015092C /* MovieDetail.swift */,
+				A411F52524C0CD040031D028 /* FriendList.swift */,
+				A411F52924C0D01F0031D028 /* FriendRow.swift */,
+				A411F52B24C0D02E0031D028 /* FriendDetail.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -142,7 +201,7 @@
 				A4C62A6524BE0C4F0015092C /* KingfisherSwiftUI */,
 			);
 			productName = Movies;
-			productReference = A46B8F2024B0EDC500E4D98E /* Movies.app */;
+			productReference = A46B8F2024B0EDC500E4D98E /* Moviegram.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -186,11 +245,22 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A411F54524C100F90031D028 /* Lato-Black.ttf in Resources */,
 				A4C62A6B24BE12960015092C /* MovieData.json in Resources */,
+				A411F54624C100F90031D028 /* Lato-BlackItalic.ttf in Resources */,
 				A46B8F3024B0EDC600E4D98E /* LaunchScreen.storyboard in Resources */,
 				A46B8F2D24B0EDC600E4D98E /* Preview Assets.xcassets in Resources */,
+				A411F54724C100F90031D028 /* Lato-ThinItalic.ttf in Resources */,
+				A411F53F24C100F90031D028 /* Lato-LightItalic.ttf in Resources */,
+				A411F54224C100F90031D028 /* Lato-BoldItalic.ttf in Resources */,
 				A4C62A6924BE127F0015092C /* MovieSearchData.json in Resources */,
 				A46B8F2A24B0EDC600E4D98E /* Assets.xcassets in Resources */,
+				A411F53324C100420031D028 /* Cookie-Regular.ttf in Resources */,
+				A411F54124C100F90031D028 /* Lato-Regular.ttf in Resources */,
+				A411F54024C100F90031D028 /* Lato-Bold.ttf in Resources */,
+				A411F54324C100F90031D028 /* Lato-Italic.ttf in Resources */,
+				A411F53E24C100F90031D028 /* Lato-Light.ttf in Resources */,
+				A411F54424C100F90031D028 /* Lato-Thin.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -201,13 +271,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A411F52624C0CD040031D028 /* FriendList.swift in Sources */,
 				A46B8F3C24B1297200E4D98E /* NetworkManager.swift in Sources */,
 				A4C62A6F24BE18D50015092C /* MovieRow.swift in Sources */,
 				A46B8F2424B0EDC500E4D98E /* AppDelegate.swift in Sources */,
+				A411F52824C0CE7B0031D028 /* AppView.swift in Sources */,
 				A46B8F2624B0EDC500E4D98E /* SceneDelegate.swift in Sources */,
+				A411F54A24C105C30031D028 /* ScaledFont.swift in Sources */,
 				A46B8F2824B0EDC500E4D98E /* MovieList.swift in Sources */,
 				A4C62A5D24BCE49E0015092C /* Movie.swift in Sources */,
+				A411F52424C0CA510031D028 /* Friend.swift in Sources */,
 				A4C62A6324BE094F0015092C /* MovieDetail.swift in Sources */,
+				A411F52A24C0D01F0031D028 /* FriendRow.swift in Sources */,
+				A411F52C24C0D02E0031D028 /* FriendDetail.swift in Sources */,
 				A4C62A6D24BE137F0015092C /* LocalData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -353,8 +429,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "Guillaume-Ramey.Movies";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = "Guillaume-Ramey.Moviegram";
+				PRODUCT_NAME = Moviegram;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -373,8 +449,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "Guillaume-Ramey.Movies";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = "Guillaume-Ramey.Moviegram";
+				PRODUCT_NAME = Moviegram;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

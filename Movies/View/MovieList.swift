@@ -7,7 +7,6 @@
 //
 
 import SwiftUI
-import KingfisherSwiftUI
 
 struct MovieList: View {
     @ObservedObject var networkManager = NetworkManager()
@@ -17,14 +16,14 @@ struct MovieList: View {
         NavigationView {
             VStack {
                 HStack {
-                    TextField("Film : ", text: $searchString)
+                    TextField("Enter text", text: $searchString)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                     Button(action: {
                         self.search()
                     }) {
                         Image(systemName: "magnifyingglass")
                     }
-                }.padding()
+                }.padding([.top, .horizontal])
                 
                 List(networkManager.results) { movie in
                     NavigationLink(destination: MovieDetail(movie: movie)) {

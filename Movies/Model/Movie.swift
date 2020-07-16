@@ -12,7 +12,7 @@ import Foundation
 struct Response: Codable {
     let search: [Movie]
     let totalResults, response: String
-
+    
     enum CodingKeys: String, CodingKey {
         case search = "Search"
         case totalResults
@@ -22,48 +22,40 @@ struct Response: Codable {
 
 // MARK: - Movie
 struct Movie: Codable, Identifiable {
-    let id, title, year, poster: String
-    let rated, released, website, response: String?
-    let runtime, genre, director, writer: String?
-    let actors, plot, language, country: String?
-    let awards, metascore, imdbRating, imdbVotes: String?
-    let type, dvd, boxOffice, production: String?
-    let ratings: [Rating]?
-
+    
+    var id, title, imageUrl: String
+    var year, runtime, genre, director, actors, plot, imdbRating: String?
+    
     enum CodingKeys: String, CodingKey {
         case id = "imdbID"
         case title = "Title"
         case year = "Year"
-        case rated = "Rated"
-        case released = "Released"
         case runtime = "Runtime"
         case genre = "Genre"
         case director = "Director"
-        case writer = "Writer"
         case actors = "Actors"
         case plot = "Plot"
-        case language = "Language"
-        case country = "Country"
-        case awards = "Awards"
-        case poster = "Poster"
-        case ratings = "Ratings"
-        case metascore = "Metascore"
-        case imdbRating, imdbVotes
-        case type = "Type"
-        case dvd = "DVD"
-        case boxOffice = "BoxOffice"
-        case production = "Production"
-        case website = "Website"
-        case response = "Response"
+        case imageUrl = "Poster"
+        case imdbRating
     }
 }
 
-// MARK: - Rating
-struct Rating: Codable {
-    let source, value: String?
 
-    enum CodingKeys: String, CodingKey {
-        case source = "Source"
-        case value = "Value"
-    }
-}
+let MOVIES = [
+    Movie(id: "tt0082971",
+          title: "Raiders of the Lost Ark",
+          imageUrl: "https://m.media-amazon.com/images/M/MV5BMjA0ODEzMTc1Nl5BMl5BanBnXkFtZTcwODM2MjAxNA@@._V1_SX300.jpg",
+          imdbRating: "8.4"),
+    Movie(id: "tt0088763",
+          title: "Back to the Future",
+          imageUrl: "https://m.media-amazon.com/images/M/MV5BZmU0M2Y1OGUtZjIxNi00ZjBkLTg1MjgtOWIyNThiZWIwYjRiXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_SX300.jpg"),
+    Movie(id: "tt0110912",
+          title: "Pulp Fiction",
+          imageUrl: "https://m.media-amazon.com/images/M/MV5BNGNhMDIzZTUtNTBlZi00MTRlLWFjM2ItYzViMjE3YzI5MjljXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_SX300.jpg"),
+    Movie(id: "tt0120737",
+          title: "The Lord of the Rings: The Fellowship of the Ring",
+          imageUrl: "https://m.media-amazon.com/images/M/MV5BN2EyZjM3NzUtNWUzMi00MTgxLWI0NTctMzY4M2VlOTdjZWRiXkEyXkFqcGdeQXVyNDUzOTQ5MjY@._V1_SX300.jpg"),
+    Movie(id: "tt0137523",
+          title: "Fight Club",
+          imageUrl: "https://m.media-amazon.com/images/M/MV5BMmEzNTkxYjQtZTc0MC00YTVjLTg5ZTEtZWMwOWVlYzY0NWIwXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_SX300.jpg"),
+]
