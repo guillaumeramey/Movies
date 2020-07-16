@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  MovieList.swift
 //  Movies
 //
 //  Created by Guillaume Ramey on 04/07/2020.
@@ -10,7 +10,7 @@ import SwiftUI
 import KingfisherSwiftUI
 
 struct MovieList: View {
-    @State private var movies = [Movie]()
+    @ObservedObject var networkManager = NetworkManager()
     @State private var searchString: String = ""
     
     var body: some View {
@@ -19,36 +19,28 @@ struct MovieList: View {
                 HStack {
                     TextField("Film : ", text: $searchString)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
-                    
                     Button(action: {
-                        self.searchMovie()
+                        self.search()
                     }) {
                         Image(systemName: "magnifyingglass")
                     }
+                }.padding()
+                
+                List(networkManager.results) { movie in
+                    NavigationLink(destination: MovieDetail(movie: movie)) {
+                        MovieRow(movie: movie)
+                    }
                 }
-                List(movies, id: \.imdbID) { movie in
-                    MovieRow(movie: movie)
-                }
-            }
-            .padding()
-            .navigationBarTitle(Text("Search a movie"))
+            }.navigationBarTitle("Search", displayMode: .inline)
         }
     }
     
-    func searchMovie() {
-        NetworkManager.shared.searchMovie(title: searchString) { result in
-            switch result {
-            case .success(let movies):
-                self.movies = movies
-                print(movies)
-            case .failure(let error):
-                print(error.rawValue)
-            }
-        }
+    func search() {
+        networkManager.search(title: searchString)
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
+struct MovieList_Previews: PreviewProvider {
     static var previews: some View {
         MovieList()
     }

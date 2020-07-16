@@ -9,58 +9,59 @@
 import UIKit
 import Combine
 
-enum NetworkError: String, Error {
-    case encodingString = "network error encodingString"
-    case badURL = "network error badURL"
-    case error = "unknown error"
-    case noData = "network error noData"
-    case noResult = "network error noResult"
-    case noResponse = "network error noResponse"
-}
+//enum NetworkError: String, Error {
+//    case encodingString = "network error encodingString"
+//    case badURL = "network error badURL"
+//    case error = "unknown error"
+//    case noData = "network error noData"
+//    case noResult = "network error noResult"
+//    case noResponse = "network error noResponse"
+//}
 
-struct NetworkManager {
-    static var shared = NetworkManager()
-    private var task: URLSessionDataTask!
-    private let session: URLSession
+class NetworkManager: ObservableObject {
+    @Published var results = [Movie]()
+    @Published var movie: Movie!
+    
     private let apiURL = "http://omdbapi.com/?"
     private let apiKey = "533d51ab"
     
-    init(session: URLSession = .shared) {
-        self.session = session
-    }
-
-    func searchMovie(title: String, completion: @escaping (Result<[Movie], NetworkError>) -> Void) {
+    func search(title: String) {
         
         let stringURL = apiURL
             + "apikey=\(apiKey)"
             + "&type=movie"
             + "&s=\(title)"
         
-        guard let url = URL(string: stringURL) else {
-            completion(.failure(.badURL))
-            return
-        }
-
-        let request = URLRequest(url: url)
+        guard let url = URL(string: stringURL) else { return }
         
-        URLSession.shared.dataTask(with: request) { data, response, error in
-            DispatchQueue.main.async {
-                guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
-                    completion(.failure(.noResponse))
-                    return
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            guard let data = data else { return }
+            
+            if let decodedResponse = try? JSONDecoder().decode(Response.self, from: data) {
+                DispatchQueue.main.async {
+                    self.results = decodedResponse.search
                 }
-                
-                guard let data = data else {
-                    completion(.failure(.noData))
-                    return
-                }
+                return
+            }
+        }.resume()
+    }
+    
+    func getMovie(id: String) {
 
-                do {
-                    let decodedResponse = try JSONDecoder().decode(Response.self, from: data)
-                    completion(.success(decodedResponse.search))
-                } catch {
-                    completion(.failure(.noResult))
+        let stringURL = apiURL
+            + "apikey=\(apiKey)"
+            + "&i=\(id)"
+
+        guard let url = URL(string: stringURL) else { return }
+
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            guard let data = data else { return }
+
+            if let decodedResponse = try? JSONDecoder().decode(Movie.self, from: data) {
+                DispatchQueue.main.async {
+                    self.movie = decodedResponse
                 }
+                return
             }
         }.resume()
     }
