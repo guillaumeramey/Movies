@@ -28,14 +28,19 @@ struct FriendRow: View {
                 Text("\(friend.movies.count) movies")
                     .font(.headline)
                     .fontWeight(.light)
+                Text("\(test) movies in common")
             }
         }
         .frame(alignment: .leading)
+    }
+    
+    var test: Int {
+        return Set(friend.movies).intersection(Set(MY_MOVIES)).count
     }
 }
 
 struct FriendRow_Previews: PreviewProvider {
     static var previews: some View {
-        FriendRow(friend: FRIEND_DETAIL)
+        FriendRow(friend: FRIENDS[1])
     }
 }

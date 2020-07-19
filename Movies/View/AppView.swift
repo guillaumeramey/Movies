@@ -11,17 +11,17 @@ import SwiftUI
 struct AppView: View {
     var body: some View {
         TabView {
+            MyMovies()
+                .tabItem {
+                    Image(systemName: "film")
+                    Text("My movies")
+            }
+            
             FriendList()
                 .tabItem {
                     Image(systemName: "person.3")
                     Text("Friends")
-                }
-
-            MovieList()
-                .tabItem {
-                    Image(systemName: "film")
-                    Text("Movies")
-                }
+            }
         }
     }
 }

@@ -10,12 +10,12 @@ import SwiftUI
 import KingfisherSwiftUI
 
 struct FriendDetail: View {
-    var friend: Friend
+    var user: Friend
     
     var body: some View {
-        VStack {
+        List {
             HStack(alignment: .top) {
-                KFImage(URL(string: self.friend.imageUrl))
+                KFImage(URL(string: self.user.imageUrl))
                     .resizable()
                     .scaledToFit()
                     .frame(width: 150)
@@ -25,25 +25,23 @@ struct FriendDetail: View {
                 
                 Spacer()
                 
-                Text(self.friend.name)
+                Text(self.user.name)
                     .font(.title)
-                
-            }.padding([.top, .horizontal])
+            }
+            .padding()
             
-            Divider()
-            
-            List(friend.movies) { movie in
+            ForEach(user.movies) { movie in
                 NavigationLink(destination: MovieDetail(movie: movie)) {
                     MovieRow(movie: movie)
                 }
             }
         }
-        .navigationBarTitle(Text(friend.name), displayMode: .inline)
+        .navigationBarTitle(Text(user.name), displayMode: .inline)
     }
 }
 
 struct FriendDetail_Previews: PreviewProvider {
     static var previews: some View {
-        FriendDetail(friend: FRIEND_DETAIL)
+        FriendDetail(user: FRIENDS[1])
     }
 }

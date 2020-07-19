@@ -12,6 +12,7 @@ import KingfisherSwiftUI
 struct MovieDetail: View {
     var movie: Movie
     @ObservedObject var networkManager = NetworkManager()
+    @State var like = false
     
     var body: some View {
         ScrollView {
@@ -20,39 +21,56 @@ struct MovieDetail: View {
                 Text(movie.title)
                     .font(.largeTitle)
                     .fontWeight(.bold)
+                    .padding(.bottom, 5)
                 
-                HStack(alignment: .bottom) {
-                    Text(networkManager.movie?.genre ?? "...")
+                HStack(alignment: .firstTextBaseline) {
+                    Text(networkManager.movie?.genre ?? " ")
                         .font(.subheadline)
                     Spacer()
-                    Text("(\(networkManager.movie?.year ?? "..."))")
+                    Text("(\(networkManager.movie?.year ?? " "))")
                         .font(.subheadline)
                 }
                 
-                KFImage(URL(string: self.movie.imageUrl))
+                KFImage(URL(string: movie.imageUrl))
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .padding(.bottom)
                 
                 HStack(alignment: .top) {
                     Text("Director: ").fontWeight(.bold)
-                    Text(networkManager.movie?.director ?? "...")
+                    Text(networkManager.movie?.director ?? " ")
                 }
                 Divider()
                 HStack(alignment: .top) {
                     Text("Stars: ").fontWeight(.bold)
-                    Text(networkManager.movie?.actors ?? "...")
+                    Text(networkManager.movie?.actors ?? " ")
                 }
                 Divider()
-                Text(networkManager.movie?.plot ?? "...")
-            }.onAppear(perform: getMovie)
-                .padding()
-        }.navigationBarTitle(movie.title)
-        
+                Text(networkManager.movie?.plot ?? " ")
+            }
+            .onAppear(perform: getMovie)
+            .padding()
+        }
+        .navigationBarTitle(Text(""), displayMode: .inline)
+        .navigationBarItems(trailing: likeButton)
+    }
+    
+    var likeButton: some View {
+        Button(action: {
+            self.like.toggle()
+            if self.like {
+                MY_MOVIES.append(self.movie)
+            } else {
+                MY_MOVIES.remove(object: self.movie)
+            }
+        }) {
+            Image(systemName: like ? "heart.fill" : "heart")
+        }
     }
     
     func getMovie() {
         networkManager.getMovie(id: movie.id)
+        like = MY_MOVIES.contains(movie)
     }
 }
 

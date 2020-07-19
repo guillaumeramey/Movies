@@ -13,10 +13,11 @@ struct FriendList: View {
     var body: some View {
         NavigationView {
             List(FRIENDS) { friend in
-                NavigationLink(destination: FriendDetail(friend: friend)) {
+                NavigationLink(destination: FriendDetail(user: friend)) {
                     FriendRow(friend: friend)
                 }
-            }.navigationBarTitle("Friends")
+            }
+            .navigationBarTitle("Friends")
         }
     }
 }

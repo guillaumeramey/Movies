@@ -9,34 +9,29 @@
 import Foundation
 
 struct Friend: Identifiable {
-    let id, name, imageUrl: String
-    let movies: [Movie]
+    var id: UUID
+    var name, imageUrl: String
+    var movies: [Movie]
 }
 
-let FRIEND_DETAIL = Friend(id: "f1",
-                            name: "John",
-                            imageUrl: "https://mymodernmet.com/wp/wp-content/uploads/2019/09/100k-ai-faces-3.jpg",
-                            movies: [Movie]())
-
-
 let FRIENDS = [
-    Friend(id: "f1",
+    Friend(id: UUID(),
            name: "John",
            imageUrl: "https://mymodernmet.com/wp/wp-content/uploads/2019/09/100k-ai-faces-3.jpg",
            movies: MOVIES),
-    Friend(id: "f2",
+    Friend(id: UUID(),
            name: "Donna",
            imageUrl: "https://mymodernmet.com/wp/wp-content/uploads/2019/09/100k-ai-faces-7.jpg",
            movies: MOVIES),
-    Friend(id: "f3",
+    Friend(id: UUID(),
            name: "Stephanie",
            imageUrl: "https://mymodernmet.com/wp/wp-content/uploads/2019/09/100k-ai-faces-5.jpg",
            movies: MOVIES),
-    Friend(id: "f4",
+    Friend(id: UUID(),
            name: "Fred",
            imageUrl: "https://mymodernmet.com/wp/wp-content/uploads/2019/09/100k-ai-faces-4.jpg",
            movies: MOVIES),
-    Friend(id: "f5",
+    Friend(id: UUID(),
            name: "Zack",
            imageUrl: "https://mymodernmet.com/wp/wp-content/uploads/2019/09/100k-ai-faces-6.jpg",
            movies: MOVIES),

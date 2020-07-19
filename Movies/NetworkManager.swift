@@ -47,16 +47,16 @@ class NetworkManager: ObservableObject {
     }
     
     func getMovie(id: String) {
-
+        
         let stringURL = apiURL
             + "apikey=\(apiKey)"
             + "&i=\(id)"
-
+        
         guard let url = URL(string: stringURL) else { return }
-
+        
         URLSession.shared.dataTask(with: url) { data, response, error in
             guard let data = data else { return }
-
+            
             if let decodedResponse = try? JSONDecoder().decode(Movie.self, from: data) {
                 DispatchQueue.main.async {
                     self.movie = decodedResponse
