@@ -33,11 +33,6 @@ func load<T: Decodable>(_ filename: String) -> T {
     }
 }
 
-var MY_MOVIES = [
-    Movie(id: "tt0110912",
-          title: "Pulp Fiction",
-          imageUrl: "https://m.media-amazon.com/images/M/MV5BNGNhMDIzZTUtNTBlZi00MTRlLWFjM2ItYzViMjE3YzI5MjljXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_SX300.jpg")]
-
 let MOVIES = [
     Movie(id: "tt0082971",
           title: "Raiders of the Lost Ark",
@@ -56,3 +51,11 @@ let MOVIES = [
           title: "Fight Club",
           imageUrl: "https://m.media-amazon.com/images/M/MV5BMmEzNTkxYjQtZTc0MC00YTVjLTg5ZTEtZWMwOWVlYzY0NWIwXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_SX300.jpg"),
 ]
+
+
+class LocalData: ObservableObject {
+    @Published var userMovies = [
+    Movie(id: "tt0110912",
+          title: "Pulp Fiction",
+          imageUrl: "https://m.media-amazon.com/images/M/MV5BNGNhMDIzZTUtNTBlZi00MTRlLWFjM2ItYzViMjE3YzI5MjljXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_SX300.jpg")]
+}

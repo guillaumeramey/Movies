@@ -11,8 +11,8 @@ import KingfisherSwiftUI
 
 struct MovieDetail: View {
     var movie: Movie
+    @EnvironmentObject var localData: LocalData
     @ObservedObject var networkManager = NetworkManager()
-    @State var like = false
     
     var body: some View {
         ScrollView {
@@ -48,7 +48,9 @@ struct MovieDetail: View {
                 Divider()
                 Text(networkManager.movie?.plot ?? " ")
             }
-            .onAppear(perform: getMovie)
+            .onAppear(perform: {
+                self.networkManager.getMovie(id: self.movie.id)
+            })
             .padding()
         }
         .navigationBarTitle(Text(""), displayMode: .inline)
@@ -57,20 +59,14 @@ struct MovieDetail: View {
     
     var likeButton: some View {
         Button(action: {
-            self.like.toggle()
-            if self.like {
-                MY_MOVIES.append(self.movie)
+            if self.localData.userMovies.contains(self.movie) {
+                self.localData.userMovies.remove(object: self.movie)
             } else {
-                MY_MOVIES.remove(object: self.movie)
+                self.localData.userMovies.append(self.movie)
             }
         }) {
-            Image(systemName: like ? "heart.fill" : "heart")
+            Image(systemName: localData.userMovies.contains(movie) ? "heart.fill" : "heart")
         }
-    }
-    
-    func getMovie() {
-        networkManager.getMovie(id: movie.id)
-        like = MY_MOVIES.contains(movie)
     }
 }
 

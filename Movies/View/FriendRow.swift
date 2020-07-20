@@ -10,6 +10,7 @@ import SwiftUI
 import KingfisherSwiftUI
 
 struct FriendRow: View {
+    @EnvironmentObject var localData: LocalData
     var friend: Friend
     
     var body: some View {
@@ -35,7 +36,7 @@ struct FriendRow: View {
     }
     
     var test: Int {
-        return Set(friend.movies).intersection(Set(MY_MOVIES)).count
+        return Set(friend.movies).intersection(Set(localData.userMovies)).count
     }
 }
 

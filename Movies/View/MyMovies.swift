@@ -10,20 +10,25 @@ import SwiftUI
 import KingfisherSwiftUI
 
 struct MyMovies: View {
+    @EnvironmentObject var localData: LocalData
     @State private var presentSearchView = false
     
     var body: some View {
         NavigationView {
-            List(MY_MOVIES) { movie in
-                NavigationLink(destination: MovieDetail(movie: movie)) {
-                    MovieRow(movie: movie)
+            List {
+                ForEach(localData.userMovies) { movie in
+                    NavigationLink(destination: MovieDetail(movie: movie)) {
+                        MovieRow(movie: movie)
+                    }
                 }
+                .onDelete(perform: deleteMovie)
             }
             .navigationBarTitle("My movies")
             .navigationBarItems(trailing: addButton)
         }
         .sheet(isPresented: self.$presentSearchView) {
             SearchMovie(isPresented: self.$presentSearchView)
+                .environmentObject(self.localData)
         }
     }
     
@@ -33,6 +38,10 @@ struct MyMovies: View {
         }) {
             Image(systemName: "plus")
         }
+    }
+    
+    func deleteMovie(at offsets: IndexSet) {
+        localData.userMovies.remove(atOffsets: offsets)
     }
 }
 
