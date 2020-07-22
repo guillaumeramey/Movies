@@ -10,12 +10,13 @@ import SwiftUI
 import KingfisherSwiftUI
 
 struct FriendDetail: View {
-    var user: Friend
+    @EnvironmentObject var localData: LocalData
+    var friend: Friend
     
     var body: some View {
         List {
             HStack(alignment: .top) {
-                KFImage(URL(string: self.user.imageUrl))
+                KFImage(URL(string: self.friend.imageUrl))
                     .resizable()
                     .scaledToFit()
                     .frame(width: 150)
@@ -25,23 +26,39 @@ struct FriendDetail: View {
                 
                 Spacer()
                 
-                Text(self.user.name)
+                Text(self.friend.name)
                     .font(.title)
             }
             .padding()
             
-            ForEach(user.movies) { movie in
-                NavigationLink(destination: MovieDetail(movie: movie)) {
-                    MovieRow(movie: movie)
+            ForEach(friend.movies) { movie in
+                if !self.localData.userMovies.contains(movie) {
+                    NavigationLink(destination: MovieDetail(movie: movie)) {
+                        MovieRow(movie: movie)
+                    }
                 }
             }
+            
+            Section {
+                Text("Movies in common:")
+                    .font(.headline)
+            }
+            
+            ForEach(friend.movies) { movie in
+                if self.localData.userMovies.contains(movie) {
+                    NavigationLink(destination: MovieDetail(movie: movie)) {
+                        MovieRow(movie: movie)
+                    }
+                }
+            }
+            
         }
-        .navigationBarTitle(Text(user.name), displayMode: .inline)
+        .navigationBarTitle(Text(friend.name), displayMode: .inline)
     }
 }
 
 struct FriendDetail_Previews: PreviewProvider {
     static var previews: some View {
-        FriendDetail(user: FRIENDS[1])
+        FriendDetail(friend: FRIENDS[1])
     }
 }

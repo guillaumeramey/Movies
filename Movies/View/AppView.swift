@@ -11,6 +11,12 @@ import SwiftUI
 struct AppView: View {
     var body: some View {
         TabView {
+            Popular()
+                .tabItem {
+                    Image(systemName: "hand.thumbsup")
+                    Text("Popular")
+            }
+            
             MyMovies()
                 .tabItem {
                     Image(systemName: "film")

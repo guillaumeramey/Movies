@@ -29,6 +29,7 @@ struct SearchMovie: View {
                               onCommit: search)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                         .overlay(clearOverlay, alignment: .trailing)
+                        .keyboardType(.webSearch)
                 }
                 .padding()
                 

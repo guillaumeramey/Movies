@@ -29,14 +29,16 @@ struct FriendRow: View {
                 Text("\(friend.movies.count) movies")
                     .font(.headline)
                     .fontWeight(.light)
-                Text("\(test) movies in common")
+                Text("You have \(commonMovies) movies in common")
             }
         }
         .frame(alignment: .leading)
     }
     
-    var test: Int {
-        return Set(friend.movies).intersection(Set(localData.userMovies)).count
+    var commonMovies: Int {
+        let friendMovies = Set(friend.movies.map {$0.id})
+        let userMovies = Set(localData.userMovies.map {$0.id})
+        return friendMovies.intersection(userMovies).count
     }
 }
 

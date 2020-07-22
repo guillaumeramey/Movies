@@ -26,6 +26,10 @@ struct Movie: Codable, Identifiable, Equatable, Hashable {
     var id, title, imageUrl: String
     var year, runtime, genre, director, actors, plot, imdbRating: String?
     
+    static func ==(lhs:Movie, rhs: Movie) -> Bool {
+        return lhs.id == rhs.id
+    }
+    
     enum CodingKeys: String, CodingKey {
         case id = "imdbID"
         case title = "Title"
