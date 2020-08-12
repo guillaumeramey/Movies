@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 struct Friend: Identifiable, Equatable {
     var id: UUID

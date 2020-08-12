@@ -13,8 +13,8 @@ struct AppView: View {
         TabView {
             Popular()
                 .tabItem {
-                    Image(systemName: "hand.thumbsup")
-                    Text("Popular")
+                    Image(systemName: "flame")
+                    Text("Top")
             }
             
             MyMovies()

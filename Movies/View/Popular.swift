@@ -12,16 +12,18 @@ struct Popular: View {
     @State private var movies = [Movie]()
     @State private var movieCounter = [Movie: Int]()
     
+    init() {
+        UINavigationBar.appearance().titleTextAttributes = [.font : UIFont(name: "Cookie-Regular", size: 34)!]
+    }
+    
     var body: some View {
         NavigationView {
             List {
                 ForEach(movies) { movie in
-                    NavigationLink(destination: MovieDetail(movie: movie)) {
-                        PopularRow(movie: movie, like: self.movieCounter[movie] ?? 0)
-                    }
+                    PopularRow(movie: movie, like: self.movieCounter[movie] ?? 0)
                 }
             }
-            .navigationBarTitle("Popular")
+            .navigationBarTitle("Moviegram", displayMode: .inline)
         }
         .onAppear(perform: movieCount)
     }

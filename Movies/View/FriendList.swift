@@ -17,7 +17,7 @@ struct FriendList: View {
                     FriendRow(friend: friend)
                 }
             }
-            .navigationBarTitle("Friends")
+            .navigationBarTitle("Friends", displayMode: .inline)
         }
     }
 }

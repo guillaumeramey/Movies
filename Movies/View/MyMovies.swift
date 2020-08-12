@@ -7,7 +7,6 @@
 //
 
 import SwiftUI
-import KingfisherSwiftUI
 
 struct MyMovies: View {
     @EnvironmentObject var localData: LocalData
@@ -23,7 +22,7 @@ struct MyMovies: View {
                 }
                 .onDelete(perform: deleteMovie)
             }
-            .navigationBarTitle("My movies")
+            .navigationBarTitle("My movies", displayMode: .inline)
             .navigationBarItems(trailing: addButton)
         }
         .sheet(isPresented: self.$presentSearchView) {

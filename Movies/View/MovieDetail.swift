@@ -25,24 +25,25 @@ struct MovieDetail: View {
                 
                 HStack(alignment: .firstTextBaseline) {
                     Text(networkManager.movie?.genre ?? " ")
-                        .font(.subheadline)
                     Spacer()
                     Text("(\(networkManager.movie?.year ?? " "))")
-                        .font(.subheadline)
                 }
+                .font(.subheadline)
                 
                 KFImage(URL(string: movie.imageUrl))
                     .resizable()
-                    .aspectRatio(contentMode: .fit)
+                    .scaledToFit()
                     .padding(.bottom)
                 
                 HStack(alignment: .top) {
-                    Text("Director: ").fontWeight(.bold)
+                    Text("Director: ")
+                        .fontWeight(.bold)
                     Text(networkManager.movie?.director ?? " ")
                 }
                 Divider()
                 HStack(alignment: .top) {
-                    Text("Stars: ").fontWeight(.bold)
+                    Text("Stars: ")
+                        .fontWeight(.bold)
                     Text(networkManager.movie?.actors ?? " ")
                 }
                 Divider()
@@ -54,19 +55,7 @@ struct MovieDetail: View {
             .padding()
         }
         .navigationBarTitle(Text(""), displayMode: .inline)
-        .navigationBarItems(trailing: likeButton)
-    }
-    
-    var likeButton: some View {
-        Button(action: {
-            if self.localData.userMovies.contains(self.movie) {
-                self.localData.userMovies.remove(object: self.movie)
-            } else {
-                self.localData.userMovies.append(self.movie)
-            }
-        }) {
-            Image(systemName: localData.userMovies.contains(movie) ? "heart.fill" : "heart")
-        }
+        .navigationBarItems(trailing: LikeButton(movie: movie).environmentObject(localData))
     }
 }
 

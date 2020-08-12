@@ -7,16 +7,10 @@
 //
 
 import UIKit
+import SwiftUI
 import Combine
 
-//enum NetworkError: String, Error {
-//    case encodingString = "network error encodingString"
-//    case badURL = "network error badURL"
-//    case error = "unknown error"
-//    case noData = "network error noData"
-//    case noResult = "network error noResult"
-//    case noResponse = "network error noResponse"
-//}
+private var movieCache = Cache<Movie.ID, Movie>()
 
 class NetworkManager: ObservableObject {
     @Published var results = [Movie]()
@@ -48,6 +42,11 @@ class NetworkManager: ObservableObject {
     
     func getMovie(id: String) {
         
+        if let cachedMovie = movieCache[id] {
+            self.movie = cachedMovie
+            return
+        }
+        
         let stringURL = apiURL
             + "apikey=\(apiKey)"
             + "&i=\(id)"
@@ -60,6 +59,7 @@ class NetworkManager: ObservableObject {
             if let decodedResponse = try? JSONDecoder().decode(Movie.self, from: data) {
                 DispatchQueue.main.async {
                     self.movie = decodedResponse
+                    movieCache[self.movie.id] = self.movie
                 }
                 return
             }

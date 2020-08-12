@@ -16,7 +16,7 @@ struct MovieRow: View {
         HStack {
             KFImage(URL(string: movie.imageUrl))
                 .resizable()
-                .aspectRatio(contentMode: .fit)
+                .scaledToFit()
                 .frame(width: 100, height: 100 * 4 / 3)
             
             Text(movie.title)
