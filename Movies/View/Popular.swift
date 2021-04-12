@@ -20,7 +20,7 @@ struct Popular: View {
         NavigationView {
             List {
                 ForEach(movies) { movie in
-                    PopularRow(movie: movie, like: self.movieCounter[movie] ?? 0)
+                    PopularRow(movie: movie, like: movieCounter[movie] ?? 0)
                 }
             }
             .navigationBarTitle("Moviegram", displayMode: .inline)

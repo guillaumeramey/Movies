@@ -74,7 +74,7 @@ struct CoverView: View {
         .rotation3DEffect(showDetail ? Angle(degrees: 180): Angle(degrees: 0), axis: (x: CGFloat(0), y: CGFloat(1), z: CGFloat(0)))
         .onTapGesture {
             withAnimation {
-                self.showDetail.toggle()
+                showDetail.toggle()
             }
         }
     }
@@ -116,7 +116,7 @@ struct DetailSide: View {
             .scaledFont(name: "Lato-Bold", size: 20)
             .colorInvert()
             .onAppear(perform: {
-                self.networkManager.getMovie(id: self.movie.id)})
+                networkManager.getMovie(id: movie.id)})
         }
     }
 }

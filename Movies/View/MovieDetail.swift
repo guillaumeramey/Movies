@@ -50,7 +50,7 @@ struct MovieDetail: View {
                 Text(networkManager.movie?.plot ?? " ")
             }
             .onAppear(perform: {
-                self.networkManager.getMovie(id: self.movie.id)
+                networkManager.getMovie(id: movie.id)
             })
             .padding()
         }

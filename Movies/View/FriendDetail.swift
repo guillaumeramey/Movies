@@ -16,7 +16,7 @@ struct FriendDetail: View {
     var body: some View {
         List {
             HStack(alignment: .top) {
-                KFImage(URL(string: self.friend.imageUrl))
+                KFImage(URL(string: friend.imageUrl))
                     .resizable()
                     .scaledToFit()
                     .frame(width: 150)
@@ -26,13 +26,13 @@ struct FriendDetail: View {
                 
                 Spacer()
                 
-                Text(self.friend.name)
+                Text(friend.name)
                     .font(.title)
             }
             .padding()
             
             ForEach(friend.movies) { movie in
-                if !self.localData.userMovies.contains(movie) {
+                if !localData.userMovies.contains(movie) {
                     NavigationLink(destination: MovieDetail(movie: movie)) {
                         MovieRow(movie: movie)
                     }
@@ -45,7 +45,7 @@ struct FriendDetail: View {
             }
             
             ForEach(friend.movies) { movie in
-                if self.localData.userMovies.contains(movie) {
+                if localData.userMovies.contains(movie) {
                     NavigationLink(destination: MovieDetail(movie: movie)) {
                         MovieRow(movie: movie)
                     }

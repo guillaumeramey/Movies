@@ -14,10 +14,10 @@ struct LikeButton: View {
     
     var body: some View {
         Button(action: {
-            if self.localData.userMovies.contains(self.movie) {
-                self.localData.userMovies.remove(object: self.movie)
+            if localData.userMovies.contains(movie) {
+                localData.userMovies.remove(object: movie)
             } else {
-                self.localData.userMovies.append(self.movie)
+                localData.userMovies.append(movie)
             }
         }) {
             ZStack {

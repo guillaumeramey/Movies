@@ -25,7 +25,7 @@ struct SearchMovie: View {
                     TextField("search",
                               text: $searchString,
                               onEditingChanged: { changed in
-                                self.isEditing = changed },
+                                isEditing = changed },
                               onCommit: search)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                         .overlay(clearOverlay, alignment: .trailing)
@@ -35,8 +35,7 @@ struct SearchMovie: View {
                 
                 if networkManager.results.isEmpty {
                     Spacer()
-                }
-                else {
+                } else {
                     List(networkManager.results) { movie in
                         NavigationLink(destination: MovieDetail(movie: movie)) {
                             MovieRow(movie: movie)
@@ -47,8 +46,6 @@ struct SearchMovie: View {
             .navigationBarTitle("Search a movie", displayMode: .inline)
             .navigationBarItems(trailing: doneButton)
         }
-        .onTapGesture { self.isEditing ? self.hideKeyboard() : nil }
-        .allowsHitTesting(isEditing)
     }
     
     var clearOverlay: some View {
@@ -66,14 +63,13 @@ struct SearchMovie: View {
     }
     
     var doneButton: some View {
-        Button(action: {
-            self.isPresented = false
-        }) {
-            Text("Done")
+        Button("Done") {
+            isPresented = false
         }
     }
     
     func search() {
+        hideKeyboard()
         networkManager.search(title: searchString)
     }
 }

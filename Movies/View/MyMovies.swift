@@ -10,7 +10,7 @@ import SwiftUI
 
 struct MyMovies: View {
     @EnvironmentObject var localData: LocalData
-    @State private var presentSearchView = false
+    @State private var showSearchView = false
     
     var body: some View {
         NavigationView {
@@ -25,15 +25,15 @@ struct MyMovies: View {
             .navigationBarTitle("My movies", displayMode: .inline)
             .navigationBarItems(trailing: addButton)
         }
-        .sheet(isPresented: self.$presentSearchView) {
-            SearchMovie(isPresented: self.$presentSearchView)
-                .environmentObject(self.localData)
+        .sheet(isPresented: $showSearchView) {
+            SearchMovie(isPresented: $showSearchView)
+                .environmentObject(localData)
         }
     }
     
     var addButton: some View {
         Button(action: {
-            self.presentSearchView = true
+            showSearchView = true
         }) {
             Image(systemName: "plus")
         }
