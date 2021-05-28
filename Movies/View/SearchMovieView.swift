@@ -10,19 +10,19 @@ import SwiftUI
 
 struct SearchMovieView: View {
     @Binding var isPresented: Bool
-    @ObservedObject var networkManager = NetworkManager()
+    @StateObject var moviesViewModel = MoviesViewModel()
     @State private var searchString = ""
     @State private var isEditing = false
     
     var body: some View {
         NavigationView {
             VStack {
-                HStack {
-                    Image(systemName: "magnifyingglass")
+                HStack(alignment: .top) {
+                    Constants.Images.search
                         .padding(5)
                         .foregroundColor(Color.gray)
                         .opacity(0.6)
-                    TextField("search",
+                    TextField(Constants.Text.searchPlaceholder,
                               text: $searchString,
                               onEditingChanged: { changed in
                                 isEditing = changed },
@@ -32,16 +32,20 @@ struct SearchMovieView: View {
                         .keyboardType(.webSearch)
                 }
                 .padding()
-                
-                if networkManager.results.isEmpty {
+                                
+                if moviesViewModel.isLoading {
+                    Spacer()
+                    ProgressView()
+                        .progressViewStyle(CircularProgressViewStyle(tint: Color.primary))
+                        .scaleEffect(x: 2, y: 2, anchor: .center)
                     Spacer()
                 } else {
-                    List(networkManager.results) { movie in
-                        MovieCell(movie: movie, showTitle: true)
+                    List(moviesViewModel.searchResults) { movie in
+                        SearchMovieCell(movie: movie)
                     }
                 }
             }
-            .navigationBarTitle("Search a movie", displayMode: .inline)
+            .navigationBarTitle(Constants.Text.Title.search, displayMode: .inline)
             .navigationBarItems(trailing: doneButton)
         }
     }
@@ -68,12 +72,7 @@ struct SearchMovieView: View {
     
     func search() {
         hideKeyboard()
-        networkManager.search(title: searchString)
+//        moviesViewModel.testSearch()
+        moviesViewModel.search(title: searchString)
     }
 }
-
-//struct MovieList_Previews: PreviewProvider {
-//    static var previews: some View {
-//        SearchMovie()
-//    }
-//}

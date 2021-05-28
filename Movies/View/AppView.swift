@@ -8,26 +8,19 @@
 
 import SwiftUI
 
-struct AppView: View {
+struct AppView: View {    
     var body: some View {
         TabView {
-            Popular()
-                .tabItem {
-                    Image(systemName: "flame")
-                    Text("Top")
-            }
+            FeedView()
+                .tabItem { Constants.Images.Tab.feed }
             
-            MyMovies()
-                .tabItem {
-                    Image(systemName: "film")
-                    Text("My movies")
-            }
+            FriendsView()
+                .tabItem { Constants.Images.Tab.friends }
             
-            FriendList()
-                .tabItem {
-                    Image(systemName: "person.3")
-                    Text("Friends")
+            NavigationView {
+                UserView(user: currentUser, isFriend: false)
             }
+            .tabItem { Constants.Images.Tab.myMovies }
         }
     }
 }
