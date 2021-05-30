@@ -13,8 +13,9 @@ class EntriesViewModel: ObservableObject {
     private var db = Firestore.firestore()
     private var entryCollection = "entries"
     @Published var entries = [Entry]()
+    @Published var filteredEntries = [Entry]()
     @Published var entry: Entry?
-        
+    
     func fetchEntries() {
         let query = db.collection(entryCollection)
             .order(by: "date", descending: true)
@@ -36,39 +37,39 @@ class EntriesViewModel: ObservableObject {
         }
     }
     
-    func fetchEntries(for user: User) {
+    func fetchEntries(for user: User, filter: UserReaction = .none) {
         guard let userId = user.id else { return }
-        let query = db.collection(entryCollection)
+        db.collection(entryCollection)
             .whereField("userId", isEqualTo: userId)
             .order(by: "date", descending: true)
-        
-        query.getDocuments() { querySnapshot, error in
-            guard error == nil else {
-                print("Error getting documents:", error?.localizedDescription ?? "")
-                return
+            .getDocuments() { querySnapshot, error in
+                guard error == nil else {
+                    print("Error getting entries:", error?.localizedDescription ?? "")
+                    return
+                }
+                
+                guard let documents = querySnapshot?.documents else {
+                    print("No entry found for user", userId)
+                    return
+                }
+                
+                DispatchQueue.main.async {
+                    self.entries = documents.compactMap { try? $0.data(as: Entry.self) }
+                    self.filterEntries(with: filter)
+                }
             }
-            
-            guard let documents = querySnapshot?.documents else {
-                print("No documents found for user", userId)
-                return
-            }
-            
-            DispatchQueue.main.async {
-                self.entries = documents.compactMap { try? $0.data(as: Entry.self) }
-            }
-        }
     }
     
-    func addEntry(reaction: UserReaction, movieId: String) {
+    func addEntry(movieId: String, reaction: UserReaction) {
         guard let userId = currentUser.id else { return }
-        entry = Entry(date: Date(), movieId: movieId, userId: userId, reaction: reaction)
+        entry = Entry(date: Date(), userId: userId, movieId: movieId, reaction: reaction)
         let _ = try? db.collection(entryCollection).document(userId + movieId).setData(from: entry)
     }
     
-    func removeEntry(movieId: String) {
-        guard let userId = currentUser.id else { return }
-        entry = nil
-        db.collection(entryCollection).document(userId + movieId).delete()
+    func removeEntry() {
+        guard let entry = entry else { return }
+        db.collection(entryCollection).document(entry.userId + entry.movieId).delete()
+        self.entry = nil
     }
     
     func fetchEntry(movieId: String) {
@@ -82,6 +83,14 @@ class EntriesViewModel: ObservableObject {
             DispatchQueue.main.async {
                 self.entry = try? documentSnapshot?.data(as: Entry.self)
             }
+        }
+    }
+    
+    func filterEntries(with reaction: UserReaction) {
+        if reaction == .none {
+            filteredEntries = entries
+        } else {
+            filteredEntries = entries.filter { $0.reaction == reaction }
         }
     }
 }

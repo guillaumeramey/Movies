@@ -10,11 +10,10 @@ import SwiftUI
 
 struct UserView: View {
     var user: User
-    var isFriend = true
-    @StateObject var entriesViewModel = EntriesViewModel()
-    @State private var showSearchView = false
-    @State private var reaction: UserReaction = .like
     private let columns: [GridItem] = Array(repeating: .init(.flexible(), spacing: 2), count: 3)
+    @State private var reaction: UserReaction = .none
+    @State private var showSearchView = false
+    @StateObject var entriesViewModel = EntriesViewModel()
     
     var body: some View {
         ScrollView {
@@ -22,24 +21,25 @@ struct UserView: View {
                 UserImage(image: user.imageUrl, size: .big)
                     .padding(.vertical)
                 
-                reactionButtons
+                reactionPicker
                 
-                if entriesViewModel.entries.count > 0 {
+                if let entries = entriesViewModel.filteredEntries {
                     LazyVGrid(columns: columns, spacing: 2) {
-                        let movieIds = entriesViewModel.entries.filter { $0.reaction == reaction }.map { $0.movieId }
-                        ForEach(movieIds, id: \.self) { movieId in
-                            MovieCell(movieId: movieId)
+                        ForEach(entries, id: \.self) { entry in
+                            MovieCell(movieId: entry.movieId)
                         }
                     }
                 }
             }
             .navigationBarTitle(user.name, displayMode: .inline)
-            .navigationBarItems(trailing: isFriend ? nil : addButton)
+            .navigationBarItems(trailing: user == currentUser ? addButton : nil)
         }
-        .onAppear(perform: { entriesViewModel.fetchEntries(for: user) })
         .sheet(isPresented: $showSearchView) {
             SearchMovieView(isPresented: $showSearchView)
         }
+        .onAppear(perform: {
+            entriesViewModel.fetchEntries(for: user, filter: reaction)
+        })
     }
     
     var addButton: some View {
@@ -51,32 +51,19 @@ struct UserView: View {
         }
     }
     
-    var reactionButtons: some View {
-        VStack {
-            HStack {
-                Spacer()
-                
-                Button(action: {
-                    reaction = .like
-                }) {
-                    ReactionImage(reaction: .like, fill: reaction == .like)
-                }
-                
-                Spacer()
-                Spacer()
-                
-                Button(action: {
-                    reaction = .dislike
-                }) {
-                    ReactionImage(reaction: .dislike, fill: reaction == .dislike)
-                }
-                
-                Spacer()
-            }
-            
-            Divider()
-                .background(Color.primary)
+    var reactionPicker: some View {
+        Picker(selection: $reaction, label: Text("Reaction")) {
+            Text("All")
+                .tag(UserReaction.none)
+            ReactionImage(reaction: .like)
+                .tag(UserReaction.like)
+            ReactionImage(reaction: .dislike)
+                .tag(UserReaction.dislike)
         }
+        .pickerStyle(SegmentedPickerStyle())
+        .onChange(of: reaction, perform: { _ in
+            entriesViewModel.filterEntries(with: reaction)
+        })
     }
 }
 

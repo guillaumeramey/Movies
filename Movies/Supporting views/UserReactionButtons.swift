@@ -9,7 +9,6 @@
 import SwiftUI
 
 struct UserReactionButtons: View {
-    var movieId: String
     var showText = false
     @EnvironmentObject var moviesViewModel: MoviesViewModel
     @EnvironmentObject var entriesViewModel: EntriesViewModel
@@ -18,10 +17,10 @@ struct UserReactionButtons: View {
         HStack {
             Button(action: {
                 if entriesViewModel.entry?.reaction == .like {
-                    entriesViewModel.removeEntry(movieId: movieId)
+                    entriesViewModel.removeEntry()
                 } else {
                     moviesViewModel.addMovie()
-                    entriesViewModel.addEntry(reaction: .like, movieId: movieId)
+                    entriesViewModel.addEntry(movieId: moviesViewModel.movie?.id ?? "", reaction: .like)
                 }
             }) {
                 ReactionImage(reaction: .like, fill: entriesViewModel.entry?.reaction == .like)
@@ -34,10 +33,10 @@ struct UserReactionButtons: View {
             
             Button(action: {
                 if entriesViewModel.entry?.reaction == .dislike {
-                    entriesViewModel.removeEntry(movieId: movieId)
+                    entriesViewModel.removeEntry()
                 } else {
                     moviesViewModel.addMovie()
-                    entriesViewModel.addEntry(reaction: .dislike, movieId: movieId)
+                    entriesViewModel.addEntry(movieId: moviesViewModel.movie?.id ?? "", reaction: .dislike)
                 }
             }) {
                 ReactionImage(reaction: .dislike, fill: entriesViewModel.entry?.reaction == .dislike)
@@ -75,6 +74,8 @@ struct ReactionImage: View {
                 }
                 Constants.Images.dislike
                     .foregroundColor(loading ? Color.secondary : Color.primary)
+            case .none:
+                EmptyView()
             }
         }
         .font(font)

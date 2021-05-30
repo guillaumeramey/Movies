@@ -1,5 +1,5 @@
 //
-//  FriendsView.swift
+//  FriendListView.swift
 //  Movies
 //
 //  Created by Guillaume Ramey on 16/07/2020.
@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct FriendsView: View {
+struct FriendListView: View {
     @EnvironmentObject var user: User
     @ObservedObject var usersViewModel = UsersViewModel()
     
@@ -54,6 +54,6 @@ struct FriendsView: View {
 
 struct FriendsView_Previews: PreviewProvider {
     static var previews: some View {
-        FriendsView()
+        FriendListView()
     }
 }

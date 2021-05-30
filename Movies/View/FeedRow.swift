@@ -39,7 +39,10 @@ struct FeedRow: View {
                 EmptyView()
             }
         }
-        .onAppear(perform: { moviesViewModel.fetchFirebaseMovie(id: entry.movieId) })
+        .onAppear(perform: {
+                    moviesViewModel.fetchFirebaseMovie(id: entry.movieId)
+            
+        })
         .background(Color.primary.colorInvert()
                         .addBorder(Constants.Colors.shadow, cornerRadius: 10)
                         .shadow(color: Constants.Colors.shadow, radius: 2.5))
@@ -52,7 +55,6 @@ struct FeedRow: View {
                 .resizable()
                 .scaledToFill()
             if showDetail {
-                #warning("?")
                 posterBack
                     .rotation3DEffect(showDetail ? Angle(degrees: 180): Angle(degrees: 0),
                                       axis: (x: CGFloat(0), y: CGFloat(1), z: CGFloat(0)))

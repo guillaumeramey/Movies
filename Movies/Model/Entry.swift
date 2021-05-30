@@ -11,13 +11,13 @@ import FirebaseFirestore
 import FirebaseFirestoreSwift
 
 enum UserReaction: String, Codable {
-    case like, dislike
+    case none, like, dislike
 }
 
 struct Entry: Codable, Hashable {
     let date: Date
-    let movieId: String
     let userId: String
+    let movieId: String
     let reaction: UserReaction
     
 //    init(from queryDocumentSnapshot: QueryDocumentSnapshot) {

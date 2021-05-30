@@ -14,6 +14,7 @@ import FirebaseFirestoreSwift
 class User: Identifiable, Equatable, Codable, ObservableObject {
     @DocumentID var id: String?
     var name, imageUrl: String
+    var entries: [Entry]?
     
     static func == (lhs: User, rhs: User) -> Bool {
         lhs.id == rhs.id

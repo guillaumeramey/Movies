@@ -10,8 +10,9 @@ import SwiftUI
 import KingfisherSwiftUI
 
 struct SearchMovieCell: View {
-    @State private var showMovieDetail = false
     var movie: Movie
+    @State private var showMovieDetail = false
+    @StateObject private var moviesViewModel = MoviesViewModel()
     
     var body: some View {
         HStack {
@@ -27,9 +28,12 @@ struct SearchMovieCell: View {
                     .font(.title3)
             }
         }
-        .onTapGesture { showMovieDetail = true }
+        .onTapGesture {
+            moviesViewModel.fetchOmdbMovie(id: movie.id)
+            showMovieDetail = true
+        }
         .sheet(isPresented: $showMovieDetail) {
-            MovieDetail(movie: movie, isSearch: true)
+            MovieView(moviesViewModel: moviesViewModel)
         }
     }
 }
