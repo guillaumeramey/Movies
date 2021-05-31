@@ -7,9 +7,11 @@
 //
 
 import Foundation
+import FirebaseAuth
 import FirebaseFirestore
 
 class EntriesViewModel: ObservableObject {
+    var currentUserId = Auth.auth().currentUser?.uid
     private var db = Firestore.firestore()
     private var entryCollection = "entries"
     @Published var entries = [Entry]()
@@ -37,11 +39,12 @@ class EntriesViewModel: ObservableObject {
         }
     }
     
-    func fetchEntries(for user: User, filter: UserReaction = .none) {
-        guard let userId = user.id else { return }
+    func fetchUserEntries(for user: User?, filter: UserReaction = .none) {
+        guard let userId = user?.id ?? currentUserId else { return }
+        
         db.collection(entryCollection)
             .whereField("userId", isEqualTo: userId)
-            .order(by: "date", descending: true)
+            .order(by: "createdTime", descending: true)
             .getDocuments() { querySnapshot, error in
                 guard error == nil else {
                     print("Error getting entries:", error?.localizedDescription ?? "")
@@ -60,21 +63,29 @@ class EntriesViewModel: ObservableObject {
             }
     }
     
-    func addEntry(movieId: String, reaction: UserReaction) {
-        guard let userId = currentUser.id else { return }
-        entry = Entry(date: Date(), userId: userId, movieId: movieId, reaction: reaction)
-        let _ = try? db.collection(entryCollection).document(userId + movieId).setData(from: entry)
+    func react(to movieId: Int, with reaction: UserReaction) {
+        if entry?.reaction == reaction {
+            deleteEntry()
+        } else {
+            addEntry(movieId: movieId, reaction: reaction)
+        }
     }
     
-    func removeEntry() {
+    func addEntry(movieId: Int, reaction: UserReaction) {
+        guard let userId = currentUserId else { return }
+        entry = Entry(userId: userId, movieId: movieId, reaction: reaction)
+        let _ = try? db.collection(entryCollection).document(userId + String(movieId)).setData(from: entry)
+    }
+    
+    func deleteEntry() {
         guard let entry = entry else { return }
-        db.collection(entryCollection).document(entry.userId + entry.movieId).delete()
+        db.collection(entryCollection).document(entry.userId + String(entry.movieId)).delete()
         self.entry = nil
     }
     
-    func fetchEntry(movieId: String) {
-        guard let userId = currentUser.id else { return }
-        db.collection(entryCollection).document(userId + movieId).getDocument { documentSnapshot, error in
+    func fetchEntry(movieId: Int) {
+        guard let userId = currentUserId else { return }
+        db.collection(entryCollection).document(userId + String(movieId)).getDocument { documentSnapshot, error in
             guard error == nil else {
                 print("Error getting movie:", error?.localizedDescription ?? "")
                 return

@@ -9,53 +9,40 @@
 import SwiftUI
 
 struct UserReactionButtons: View {
-    var showText = false
     @EnvironmentObject var moviesViewModel: MoviesViewModel
     @EnvironmentObject var entriesViewModel: EntriesViewModel
     
     var body: some View {
-        HStack {
-            Button(action: {
-                if entriesViewModel.entry?.reaction == .like {
-                    entriesViewModel.removeEntry()
-                } else {
-                    moviesViewModel.addMovie()
-                    entriesViewModel.addEntry(movieId: moviesViewModel.movie?.id ?? "", reaction: .like)
+        HStack(spacing: 15) {
+            if let movieId = moviesViewModel.movie?.id {
+                Button(action: {
+                    entriesViewModel.react(to: movieId, with: .like)
+                }) {
+                    ReactionImage(reaction: .like, fill: entriesViewModel.entry?.reaction == .like)
                 }
-            }) {
-                ReactionImage(reaction: .like, fill: entriesViewModel.entry?.reaction == .like)
-                if showText {
-                    Text(Constants.Text.like)
-                        .foregroundColor(Color.primary)
+                
+                Button(action: {
+                    entriesViewModel.react(to: movieId, with: .dislike)
+                }) {
+                    ReactionImage(reaction: .dislike, fill: entriesViewModel.entry?.reaction == .dislike)
                 }
-            }
-            .buttonStyle(BorderlessButtonStyle())
-            
-            Button(action: {
-                if entriesViewModel.entry?.reaction == .dislike {
-                    entriesViewModel.removeEntry()
-                } else {
-                    moviesViewModel.addMovie()
-                    entriesViewModel.addEntry(movieId: moviesViewModel.movie?.id ?? "", reaction: .dislike)
-                }
-            }) {
-                ReactionImage(reaction: .dislike, fill: entriesViewModel.entry?.reaction == .dislike)
-                if showText {
-                    Text(Constants.Text.dislike)
-                        .foregroundColor(Color.primary)
+                
+                Button(action: {
+                    entriesViewModel.react(to: movieId, with: .watchlist)
+                }) {
+                    ReactionImage(reaction: .watchlist, fill: entriesViewModel.entry?.reaction == .watchlist)
                 }
             }
-            .buttonStyle(BorderlessButtonStyle())
         }
+        .buttonStyle(BorderlessButtonStyle())
     }
 }
-
 
 struct ReactionImage: View {
     var reaction: UserReaction
     var fill = false
     var loading = false
-    var font = Font.title3
+    var font = Font.title2
     
     var body: some View {
         ZStack {
@@ -73,6 +60,13 @@ struct ReactionImage: View {
                         .foregroundColor(Constants.Colors.dislike)
                 }
                 Constants.Images.dislike
+                    .foregroundColor(loading ? Color.secondary : Color.primary)
+            case .watchlist:
+                if fill {
+                    Constants.Images.watchlistFill
+                        .foregroundColor(Constants.Colors.watchlist)
+                }
+                Constants.Images.watchlist
                     .foregroundColor(loading ? Color.secondary : Color.primary)
             case .none:
                 EmptyView()

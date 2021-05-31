@@ -10,6 +10,8 @@ import SwiftUI
 
 struct Constants {
     
+    static let posterPath = "https://image.tmdb.org/t/p/original"
+    
     struct Text {
         struct Title {
             static let feed = "Movie Buddies"
@@ -33,7 +35,7 @@ struct Constants {
             
         }
         
-        static let searchPlaceholder = "search"
+        static let searchPlaceholder = "Search"
         static let like = "Like"
         static let dislike = "Dislike"
     }
@@ -41,6 +43,7 @@ struct Constants {
     struct Images {
         struct Tab {
             static let feed = Image(systemName: "house")
+            static let search = Image(systemName: "magnifyingglass")
             static let myMovies = Image(systemName: "film")
             static let friends = Image(systemName: "person.3")
         }
@@ -49,6 +52,8 @@ struct Constants {
         static let likeFill = Image(systemName: "hand.thumbsup.fill")
         static let dislike = Image(systemName: "hand.thumbsdown")
         static let dislikeFill = Image(systemName: "hand.thumbsdown.fill")
+        static let watchlist = Image(systemName: "bookmark")
+        static let watchlistFill = Image(systemName: "bookmark.fill")
         
         static let affinity = Image(systemName: "flame")
         
@@ -64,5 +69,6 @@ struct Constants {
         static let shadow = Color(UIColor(named: "ColorShadow") ?? .black)
         static let like = Color.green
         static let dislike = Color.red
+        static let watchlist = Color.yellow
     }
 }

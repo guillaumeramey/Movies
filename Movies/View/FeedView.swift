@@ -14,7 +14,7 @@ struct FeedView: View {
             reader?.scrollTo("top", anchor: .top)
         }
     }
-    @State private var reactionCount = [Movie: Int]()
+//    @State private var reactionCount = [Movie: Int]()
     @State private var showingFilterSheet = false
     @State private var showingCalendarSheet = false
     @State private var reader: ScrollViewProxy?

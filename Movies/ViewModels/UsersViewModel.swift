@@ -7,12 +7,11 @@
 //
 
 import Foundation
+import FirebaseAuth
 import FirebaseFirestore
 
-#warning("current user")
-var currentUser = User(id:"oDRMp7iC1sAQ3vRRqdUw", name: "XXX", imageUrl: "")
-
 class UsersViewModel: ObservableObject {
+    var currentUserId = Auth.auth().currentUser?.uid
     private var db = Firestore.firestore()
     @Published var users = [User]() //{
 //        didSet {
@@ -34,8 +33,8 @@ class UsersViewModel: ObservableObject {
             
             guard let documents = querySnapshot?.documents else { return }
             self.users = documents.compactMap { queryDocumentSnapshot in
-                if queryDocumentSnapshot.documentID == currentUser.id {
-                    currentUser = User(from: queryDocumentSnapshot)
+                if queryDocumentSnapshot.documentID == self.currentUserId {
+//                    currentUser = User(from: queryDocumentSnapshot)
                     return nil
                 }
                 return User(from: queryDocumentSnapshot)

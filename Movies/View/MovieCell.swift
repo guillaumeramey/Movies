@@ -10,26 +10,26 @@ import SwiftUI
 import KingfisherSwiftUI
 
 struct MovieCell: View {
-    var movieId: String
+    var movieId: Int
     @State private var showMovieDetail = false
     @StateObject private var moviesViewModel = MoviesViewModel()
     
     var body: some View {
         HStack {
             if let movie = moviesViewModel.movie {
-                KFImage(URL(string: movie.imageUrl))
+                KFImage(movie.posterUrl)
                     .placeholder { progressView }
                     .resizable()
                     .onTapGesture { showMovieDetail = true }
-                    .sheet(isPresented: $showMovieDetail) {
-                        MovieView(moviesViewModel: moviesViewModel)
-                }
             } else {
                 progressView
             }
         }
         .aspectRatio(21/29.7, contentMode: .fill)
-        .onAppear { moviesViewModel.fetchFirebaseMovie(id: movieId) }
+        .onAppear { moviesViewModel.fetchTmdbMovie(id: movieId) }
+        .sheet(isPresented: $showMovieDetail) {
+            MovieView(moviesViewModel: moviesViewModel)
+        }
     }
     
     var progressView: some View {

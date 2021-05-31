@@ -1,12 +1,31 @@
 {
-    "imdbID": "tt0082971",
-    "Title": "Raiders of the Lost Ark",
-    "Poster": "https://m.media-amazon.com/images/M/MV5BMjA0ODEzMTc1Nl5BMl5BanBnXkFtZTcwODM2MjAxNA@@._V1_SX300.jpg",
-    "Year": "1981",
-    "Runtime": "115 min",
-    "Genre": "Action, Adventure",
-    "Director": "Steven Spielberg",
-    "Actors": "Harrison Ford, Karen Allen, Paul Freeman, Ronald Lacey",
-    "Plot": "In 1936, archaeologist and adventurer Indiana Jones is hired by the U.S. government to find the Ark of the Covenant before Adolf Hitler's Nazis can obtain its awesome powers.",
-    "imdbRating": "8.4",
+    "genres": [
+        {
+            "id": 80,
+            "name": "Crime"
+        },
+        {
+            "id": 18,
+            "name": "Drame"
+        },
+        {
+            "id": 53,
+            "name": "Thriller"
+        },
+        {
+            "id": 28,
+            "name": "Action"
+        }
+    ],
+    "homepage": "http://www.jackreachermovie.com/",
+    "id": 75780,
+    "imdb_id": "tt0790724",
+    "original_language": "en",
+    "original_title": "Jack Reacher",
+    "overview": "Lentement, méticuleusement, un sniper armé d’un fusil à lunettes repère ses victimes au sein de la foule affairée d’une grande ville. Il tire six fois, abat cinq personnes. Arrêté, interrogé, apparemment clairement responsable du carnage, l’homme n’avoue pas. Il ne prononce qu’une seule phrase lors de son interrogatoire : « Trouvez Jack Reacher ». Et Reacher, justement, est perturbé par cette affaire dont la résolution lui semble trop simple. Il connaît le tireur, un militaire surentraîné, et sait que jamais, il n’aurait raté une de ses cibles. Avec l’aide d’une avocate, Helen Rodin, Reacher va mettre le nez dans un imbroglio aux allures de complot explosif…",
+    "poster_path": "/yx9jmcMWMfO0gJfpmmKR0u016VQ.jpg",
+    "runtime": 131,
+    "tagline": "Pas de règles. Pas de limites.",
+    "title": "Jack Reacher",
+    "release_date": "2012-12-20"
 }

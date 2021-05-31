@@ -11,27 +11,12 @@ import FirebaseFirestore
 import FirebaseFirestoreSwift
 
 enum UserReaction: String, Codable {
-    case none, like, dislike
+    case none, like, dislike, watchlist
 }
 
 struct Entry: Codable, Hashable {
-    let date: Date
+    @ServerTimestamp var createdTime: Timestamp?
     let userId: String
-    let movieId: String
+    let movieId: Int
     let reaction: UserReaction
-    
-//    init(from queryDocumentSnapshot: QueryDocumentSnapshot) {
-//        let data = queryDocumentSnapshot.data()
-//        date = data["date"] as? Date ?? Date()
-//        imdbId = data["movieId"] as? String ?? ""
-//        userId = data["userId"] as? String ?? ""
-//        switch data["reaction"] as? Int ?? 0 {
-//        case 1:
-//            self.reaction = .like
-//        case 2:
-//            self.reaction = .dislike
-//        default:
-//            self.reaction = .none
-//        }
-//    }
 }

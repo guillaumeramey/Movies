@@ -14,57 +14,54 @@ struct MovieView: View {
     @ObservedObject var entriesViewModel = EntriesViewModel()
     
     var body: some View {
-        ZStack {
+        ScrollView {
             if let movie = moviesViewModel.movie {
-                ScrollView {
-                    VStack(alignment: .leading) {
-                        HStack {
-                            Text(movie.title)
-                                .font(.largeTitle)
-                                .fontWeight(.bold)
-                                .padding(.bottom, 5)
-                            
+                VStack(alignment: .leading) {
+                    Text(movie.title)
+                        .font(.title)
+                        .fontWeight(.bold)
+                    //                    .padding(.bottom, 5)
+                    
+                    HStack(alignment: .firstTextBaseline) {
+                        Text(movie.releaseDate)
+                            .font(.title3)
+                            .fontWeight(.thin)
+                        
+                        if let runtime = movie.runtime {
                             Spacer()
                             
-                            UserReactionButtons()
-                                .environmentObject(entriesViewModel)
-                                .environmentObject(moviesViewModel)
+                            Text(String(runtime) + " mn")
+                                .font(.title3)
+                                .fontWeight(.thin)
                         }
-                        
-                        Divider()
-                        
-                        HStack(alignment: .firstTextBaseline) {
-                            Text(movie.genres.joined(separator: ", "))
-                            Spacer()
-                            Text(String(movie.year))
-                        }
-                        .font(.subheadline)
-                        
-                        KFImage(URL(string: movie.imageUrl))
-                            .resizable()
-                            .scaledToFit()
-                            .padding(.bottom)
-                        
-                        HStack(alignment: .top) {
-                            Text("Director: ")
-                                .fontWeight(.bold)
-                            Text(movie.director)
-                        }
-                        
-                        Divider()
-                        
-                        HStack(alignment: .top) {
-                            Text("Cast: ")
-                                .fontWeight(.bold)
-                            Text(movie.actors.joined(separator: ", "))
-                        }
-                        
-                        Divider()
-                        
-                        Text(movie.plot)
                     }
-                    .padding()
+                    
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        LazyHStack {
+                            ForEach(movie.genres.map { $0.name }, id: \.self) { genre in
+                                Text(genre)
+                                    .padding(5)
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 6)
+                                            .stroke(Color.primary, lineWidth: 1)
+                                    )
+                            }
+                        }
+                        .padding(.leading, 1)
+                    }
+                    .frame(height: 34)
+                    
+                    KFImage(movie.posterUrl)
+                        .resizable()
+                        .scaledToFit()
+                    
+                    UserReactionButtons()
+                        .environmentObject(entriesViewModel)
+                        .environmentObject(moviesViewModel)
+                    
+                    Text(movie.overview)
                 }
+                .padding()
             }
         }
         .onAppear(perform: {

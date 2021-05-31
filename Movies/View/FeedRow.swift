@@ -40,7 +40,7 @@ struct FeedRow: View {
             }
         }
         .onAppear(perform: {
-                    moviesViewModel.fetchFirebaseMovie(id: entry.movieId)
+            moviesViewModel.fetchTmdbMovie(id: entry.movieId)
             
         })
         .background(Color.primary.colorInvert()
@@ -51,7 +51,7 @@ struct FeedRow: View {
     
     var posterView: some View {
         ZStack {
-            KFImage(URL(string: moviesViewModel.movie?.imageUrl ?? ""))
+            KFImage(moviesViewModel.movie?.posterUrl)
                 .resizable()
                 .scaledToFill()
             if showDetail {
@@ -75,36 +75,16 @@ struct FeedRow: View {
             VStack(alignment: .leading) {
                 if let movie = moviesViewModel.movie {
                     HStack(alignment: .top) {
-                        Text(movie.genres.joined(separator: ", "))
+                        Text(movie.genres.map { $0.name }.joined(separator: ", "))
                             .fontWeight(.bold)
                         Spacer()
-                        Text("(\(String(movie.year)))")
+                        Text(movie.releaseDate)
                             .fontWeight(.bold)
                     }
                     
                     Spacer()
                     
-                    HStack(alignment: .top) {
-                        Text("Director: ")
-                            .fontWeight(.bold)
-                            .underline()
-                        Text(movie.director)
-                            .fontWeight(.bold)
-                    }
-                    
-                    Spacer()
-                    
-                    HStack(alignment: .top) {
-                        Text("Cast: ")
-                            .fontWeight(.bold)
-                            .underline()
-                        Text(movie.actors.joined(separator: ", "))
-                            .fontWeight(.bold)
-                    }
-                    
-                    Spacer()
-                    
-                    Text(movie.plot)
+                    Text(movie.overview)
                         .fontWeight(.bold)
                 } else {
                     ProgressView()

@@ -9,16 +9,15 @@
 import SwiftUI
 
 struct UserView: View {
-    var user: User
+    var user: User?
     private let columns: [GridItem] = Array(repeating: .init(.flexible(), spacing: 2), count: 3)
     @State private var reaction: UserReaction = .none
-    @State private var showSearchView = false
     @StateObject var entriesViewModel = EntriesViewModel()
     
     var body: some View {
         ScrollView {
             ScrollViewReader { reader in
-                UserImage(image: user.imageUrl, size: .big)
+                UserImage(image: user?.imageUrl ?? "", size: .big)
                     .padding(.vertical)
                 
                 reactionPicker
@@ -31,24 +30,11 @@ struct UserView: View {
                     }
                 }
             }
-            .navigationBarTitle(user.name, displayMode: .inline)
-            .navigationBarItems(trailing: user == currentUser ? addButton : nil)
-        }
-        .sheet(isPresented: $showSearchView) {
-            SearchMovieView(isPresented: $showSearchView)
+            .navigationBarTitle(user?.name ?? "", displayMode: .inline)
         }
         .onAppear(perform: {
-            entriesViewModel.fetchEntries(for: user, filter: reaction)
+            entriesViewModel.fetchUserEntries(for: user, filter: reaction)
         })
-    }
-    
-    var addButton: some View {
-        Button(action: {
-            showSearchView = true
-        }) {
-            Constants.Images.add
-                .foregroundColor(Color.primary)
-        }
     }
     
     var reactionPicker: some View {
@@ -59,6 +45,8 @@ struct UserView: View {
                 .tag(UserReaction.like)
             ReactionImage(reaction: .dislike)
                 .tag(UserReaction.dislike)
+            ReactionImage(reaction: .watchlist)
+                .tag(UserReaction.watchlist)
         }
         .pickerStyle(SegmentedPickerStyle())
         .onChange(of: reaction, perform: { _ in

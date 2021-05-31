@@ -14,11 +14,14 @@ struct AppView: View {
             FeedView()
                 .tabItem { Constants.Images.Tab.feed }
             
+            SearchView()
+                .tabItem { Constants.Images.Tab.search}
+            
             FriendListView()
                 .tabItem { Constants.Images.Tab.friends }
             
             NavigationView {
-                UserView(user: currentUser)
+                UserView()
             }
             .tabItem { Constants.Images.Tab.myMovies }
         }

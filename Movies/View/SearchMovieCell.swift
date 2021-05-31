@@ -10,13 +10,14 @@ import SwiftUI
 import KingfisherSwiftUI
 
 struct SearchMovieCell: View {
-    var movie: Movie
+    var movie: Search.Result
     @State private var showMovieDetail = false
     @StateObject private var moviesViewModel = MoviesViewModel()
     
     var body: some View {
         HStack {
-            KFImage(URL(string: movie.imageUrl))
+            KFImage(movie.posterUrl)
+                .placeholder { progressView }
                 .resizable()
                 .frame(width: 100, height: 100 * 29.7 / 21)
             
@@ -24,16 +25,22 @@ struct SearchMovieCell: View {
                 Text(movie.title)
                     .font(.title2)
                     .fontWeight(.bold)
-                Text(String(movie.year))
+                Text(movie.releaseDate)
                     .font(.title3)
             }
         }
         .onTapGesture {
-            moviesViewModel.fetchOmdbMovie(id: movie.id)
+//            moviesViewModel.testFetchTmdbMovie()
+            moviesViewModel.fetchTmdbMovie(id: movie.id)
             showMovieDetail = true
         }
         .sheet(isPresented: $showMovieDetail) {
             MovieView(moviesViewModel: moviesViewModel)
         }
+    }
+    
+    var progressView: some View {
+        ProgressView()
+            .progressViewStyle(CircularProgressViewStyle(tint: Color.primary))
     }
 }
