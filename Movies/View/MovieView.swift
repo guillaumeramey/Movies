@@ -10,17 +10,16 @@ import SwiftUI
 import KingfisherSwiftUI
 
 struct MovieView: View {
-    @ObservedObject var moviesViewModel: MoviesViewModel
+    @ObservedObject var movieVM: MovieViewModel
     @ObservedObject var entriesViewModel = EntriesViewModel()
     
     var body: some View {
         ScrollView {
-            if let movie = moviesViewModel.movie {
+            if let movie = movieVM.movie {
                 VStack(alignment: .leading) {
                     Text(movie.title)
                         .font(.title)
                         .fontWeight(.bold)
-                    //                    .padding(.bottom, 5)
                     
                     HStack(alignment: .firstTextBaseline) {
                         Text(movie.releaseDate)
@@ -57,7 +56,7 @@ struct MovieView: View {
                     
                     UserReactionButtons()
                         .environmentObject(entriesViewModel)
-                        .environmentObject(moviesViewModel)
+                        .environmentObject(movieVM)
                     
                     Text(movie.overview)
                 }
@@ -65,7 +64,7 @@ struct MovieView: View {
             }
         }
         .onAppear(perform: {
-            guard let movieId = moviesViewModel.movie?.id else { return }
+            guard let movieId = movieVM.movie?.id else { return }
             entriesViewModel.fetchEntry(movieId: movieId)
         })
     }

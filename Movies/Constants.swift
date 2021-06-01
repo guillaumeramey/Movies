@@ -11,6 +11,8 @@ import SwiftUI
 struct Constants {
     
     static let posterPath = "https://image.tmdb.org/t/p/original"
+    static let tmdbUrl = "https://api.themoviedb.org/3"
+    static let tmdbKey = "b38b9ede5967708ae9e2dc9786ed164d"
     
     struct Text {
         struct Title {

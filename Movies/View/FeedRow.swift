@@ -11,12 +11,12 @@ import KingfisherSwiftUI
 
 struct FeedRow: View {
     var entry: Entry
-    @StateObject var moviesViewModel = MoviesViewModel()
+    @StateObject var movieVM = MovieViewModel()
     @State private var showDetail = false
     
     var body: some View {
         VStack(alignment: .leading) {
-            if let movie = moviesViewModel.movie {
+            if let movie = movieVM.movie {
                 HStack {
                     Text(movie.title)
                         .font(.title2)
@@ -40,7 +40,7 @@ struct FeedRow: View {
             }
         }
         .onAppear(perform: {
-            moviesViewModel.fetchTmdbMovie(id: entry.movieId)
+            movieVM.fetchMovie(id: entry.movieId)
             
         })
         .background(Color.primary.colorInvert()
@@ -51,7 +51,7 @@ struct FeedRow: View {
     
     var posterView: some View {
         ZStack {
-            KFImage(moviesViewModel.movie?.posterUrl)
+            KFImage(movieVM.movie?.posterUrl)
                 .resizable()
                 .scaledToFill()
             if showDetail {
@@ -73,7 +73,7 @@ struct FeedRow: View {
                 .opacity(0.5)
             
             VStack(alignment: .leading) {
-                if let movie = moviesViewModel.movie {
+                if let movie = movieVM.movie {
                     HStack(alignment: .top) {
                         Text(movie.genres.map { $0.name }.joined(separator: ", "))
                             .fontWeight(.bold)

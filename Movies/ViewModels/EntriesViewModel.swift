@@ -39,7 +39,7 @@ class EntriesViewModel: ObservableObject {
         }
     }
     
-    func fetchUserEntries(for user: User?, filter: UserReaction = .none) {
+    func fetchUserEntries(for user: User?) {
         guard let userId = user?.id ?? currentUserId else { return }
         
         db.collection(entryCollection)
@@ -58,7 +58,7 @@ class EntriesViewModel: ObservableObject {
                 
                 DispatchQueue.main.async {
                     self.entries = documents.compactMap { try? $0.data(as: Entry.self) }
-                    self.filterEntries(with: filter)
+                    self.filterEntries(with: .like)
                 }
             }
     }

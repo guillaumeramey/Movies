@@ -12,28 +12,17 @@ import KingfisherSwiftUI
 struct MovieCell: View {
     var movieId: Int
     @State private var showMovieDetail = false
-    @StateObject private var moviesViewModel = MoviesViewModel()
+    @StateObject private var movieVM = MovieViewModel()
     
     var body: some View {
-        HStack {
-            if let movie = moviesViewModel.movie {
-                KFImage(movie.posterUrl)
-                    .placeholder { progressView }
-                    .resizable()
-                    .onTapGesture { showMovieDetail = true }
-            } else {
-                progressView
+        KFImage(movieVM.movie?.posterUrl)
+            .placeholder { LoadingColor() }
+            .resizable()
+            .onTapGesture { showMovieDetail = true }
+            .aspectRatio(21/29.7, contentMode: .fill)
+            .onAppear { movieVM.fetchMovie(id: movieId) }
+            .sheet(isPresented: $showMovieDetail) {
+                MovieView(movieVM: movieVM)
             }
-        }
-        .aspectRatio(21/29.7, contentMode: .fill)
-        .onAppear { moviesViewModel.fetchTmdbMovie(id: movieId) }
-        .sheet(isPresented: $showMovieDetail) {
-            MovieView(moviesViewModel: moviesViewModel)
-        }
-    }
-    
-    var progressView: some View {
-        ProgressView()
-            .progressViewStyle(CircularProgressViewStyle(tint: Color.primary))
     }
 }

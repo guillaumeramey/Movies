@@ -11,7 +11,7 @@ import SwiftUI
 struct UserView: View {
     var user: User?
     private let columns: [GridItem] = Array(repeating: .init(.flexible(), spacing: 2), count: 3)
-    @State private var reaction: UserReaction = .none
+    @State private var reaction: UserReaction = .like
     @StateObject var entriesViewModel = EntriesViewModel()
     
     var body: some View {
@@ -33,14 +33,12 @@ struct UserView: View {
             .navigationBarTitle(user?.name ?? "", displayMode: .inline)
         }
         .onAppear(perform: {
-            entriesViewModel.fetchUserEntries(for: user, filter: reaction)
+            entriesViewModel.fetchUserEntries(for: user)
         })
     }
     
     var reactionPicker: some View {
         Picker(selection: $reaction, label: Text("Reaction")) {
-            Text("All")
-                .tag(UserReaction.none)
             ReactionImage(reaction: .like)
                 .tag(UserReaction.like)
             ReactionImage(reaction: .dislike)

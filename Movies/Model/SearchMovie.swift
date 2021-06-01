@@ -7,15 +7,8 @@
 //
 
 import Foundation
-// This file was generated from JSON Schema using quicktype, do not modify it directly.
-// To parse the JSON, add this file to your project and do:
-//
-//   let search = try? newJSONDecoder().decode(Search.self, from: jsonData)
 
-import Foundation
-
-// MARK: - Search
-struct Search: Codable {
+struct SearchMovie: Codable {
     let page, totalPages, totalResults: Int
     let results: [Result]
     
@@ -30,8 +23,6 @@ struct Search: Codable {
         let id: Int
         let genreIDS: [Int]
         let title, originalLanguage, originalTitle, overview: String
-        let popularity, voteAverage: Double
-        let voteCount: Int
         private let _releaseDate, _posterPath: String?
         
         var releaseDate: String { String(_releaseDate?.prefix(4) ?? "")}
@@ -44,12 +35,9 @@ struct Search: Codable {
             case genreIDS = "genre_ids"
             case originalLanguage = "original_language"
             case originalTitle = "original_title"
-            case overview, popularity
             case _posterPath = "poster_path"
-            case voteAverage = "vote_average"
-            case voteCount = "vote_count"
             case _releaseDate = "release_date"
-            case id, title
+            case id, title, overview
         }
     }
 }

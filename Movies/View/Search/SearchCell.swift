@@ -1,5 +1,5 @@
 //
-//  SearchMovieCell.swift
+//  SearchCell.swift
 //  Movie Buddies
 //
 //  Created by Guillaume Ramey on 26/05/2021.
@@ -9,15 +9,15 @@
 import SwiftUI
 import KingfisherSwiftUI
 
-struct SearchMovieCell: View {
-    var movie: Search.Result
+struct SearchCell: View {
+    var movie: SearchMovie.Result
     @State private var showMovieDetail = false
-    @StateObject private var moviesViewModel = MoviesViewModel()
+    @StateObject private var movieVM = MovieViewModel()
     
     var body: some View {
         HStack {
             KFImage(movie.posterUrl)
-                .placeholder { progressView }
+                .placeholder { LoadingColor() }
                 .resizable()
                 .frame(width: 100, height: 100 * 29.7 / 21)
             
@@ -30,17 +30,11 @@ struct SearchMovieCell: View {
             }
         }
         .onTapGesture {
-//            moviesViewModel.testFetchTmdbMovie()
-            moviesViewModel.fetchTmdbMovie(id: movie.id)
+            movieVM.fetchMovie(id: movie.id)
             showMovieDetail = true
         }
         .sheet(isPresented: $showMovieDetail) {
-            MovieView(moviesViewModel: moviesViewModel)
+            MovieView(movieVM: movieVM)
         }
-    }
-    
-    var progressView: some View {
-        ProgressView()
-            .progressViewStyle(CircularProgressViewStyle(tint: Color.primary))
     }
 }

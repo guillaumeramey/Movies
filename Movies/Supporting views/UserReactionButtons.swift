@@ -9,12 +9,12 @@
 import SwiftUI
 
 struct UserReactionButtons: View {
-    @EnvironmentObject var moviesViewModel: MoviesViewModel
+    @EnvironmentObject var movieVM: MovieViewModel
     @EnvironmentObject var entriesViewModel: EntriesViewModel
     
     var body: some View {
         HStack(spacing: 15) {
-            if let movieId = moviesViewModel.movie?.id {
+            if let movieId = movieVM.movie?.id {
                 Button(action: {
                     entriesViewModel.react(to: movieId, with: .like)
                 }) {
@@ -68,8 +68,6 @@ struct ReactionImage: View {
                 }
                 Constants.Images.watchlist
                     .foregroundColor(loading ? Color.secondary : Color.primary)
-            case .none:
-                EmptyView()
             }
         }
         .font(font)

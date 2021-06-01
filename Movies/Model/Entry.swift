@@ -11,7 +11,7 @@ import FirebaseFirestore
 import FirebaseFirestoreSwift
 
 enum UserReaction: String, Codable {
-    case none, like, dislike, watchlist
+    case like, dislike, watchlist
 }
 
 struct Entry: Codable, Hashable {
