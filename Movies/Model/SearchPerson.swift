@@ -42,11 +42,11 @@ struct SearchPerson: Codable {
     // MARK: - KnownFor
     struct KnownFor: Codable, Identifiable {
         let id: Int
-        let originalTitle, posterPath: String
-        let releaseDate: String
-        let genreIDS: [Int]
-        let title: String
-        let overview: String
+        let originalTitle, posterPath: String?
+        let releaseDate: String?
+        let genreIDS: [Int]?
+        let title: String?
+        let overview: String?
         
         enum CodingKeys: String, CodingKey {
             case originalTitle = "original_title"

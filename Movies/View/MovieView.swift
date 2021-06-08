@@ -11,15 +11,16 @@ import KingfisherSwiftUI
 
 struct MovieView: View {
     @ObservedObject var movieVM: MovieViewModel
-    @ObservedObject var entriesViewModel = EntriesViewModel()
+    @ObservedObject var entriesViewModel = EntryViewModel()
     
     var body: some View {
         ScrollView {
             if let movie = movieVM.movie {
                 VStack(alignment: .leading) {
-                    Text(movie.title)
+                    Text(movie.title ?? "")
                         .font(.title)
                         .fontWeight(.bold)
+                        .padding(.bottom, 2)
                     
                     HStack(alignment: .firstTextBaseline) {
                         Text(movie.releaseDate)
@@ -37,7 +38,7 @@ struct MovieView: View {
                     
                     ScrollView(.horizontal, showsIndicators: false) {
                         LazyHStack {
-                            ForEach(movie.genres.map { $0.name }, id: \.self) { genre in
+                            ForEach(movie.genres?.map { $0.name } ?? [], id: \.self) { genre in
                                 Text(genre)
                                     .padding(5)
                                     .overlay(
@@ -58,7 +59,7 @@ struct MovieView: View {
                         .environmentObject(entriesViewModel)
                         .environmentObject(movieVM)
                     
-                    Text(movie.overview)
+                    Text(movie.overview ?? "")
                 }
                 .padding()
             }

@@ -23,7 +23,7 @@ class SearchViewModel: ObservableObject {
         let stringURL = Constants.tmdbUrl
             + "/search/movie"
             + "?api_key=\(Constants.tmdbKey)"
-            + "&query=\(searchString)"
+            + "&query=\(searchString.replacingOccurrences(of: " ", with: "+"))"
             + "&language=fr"
             + "&include_adult=false"
         

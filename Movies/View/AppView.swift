@@ -8,22 +8,25 @@
 
 import SwiftUI
 
-struct AppView: View {    
+struct AppView: View {
+    var userVM = UserViewModel()
+    
     var body: some View {
         TabView {
-            FeedView()
+            EntryListView()
                 .tabItem { Constants.Images.Tab.feed }
             
             SearchView()
                 .tabItem { Constants.Images.Tab.search}
             
-            FriendListView()
-                .tabItem { Constants.Images.Tab.friends }
+            UserListView()
+                .tabItem { Constants.Images.Tab.users }
             
             NavigationView {
-                UserView()
+                UserView(userVM: userVM)
             }
-            .tabItem { Constants.Images.Tab.myMovies }
+            .onAppear { userVM.fetchUser() }
+            .tabItem { Constants.Images.Tab.currentUser }
         }
     }
 }

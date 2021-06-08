@@ -7,22 +7,37 @@
 //
 
 import SwiftUI
+import AuthenticationServices
 
 struct UserView: View {
-    var user: User?
     private let columns: [GridItem] = Array(repeating: .init(.flexible(), spacing: 2), count: 3)
     @State private var reaction: UserReaction = .like
-    @StateObject var entriesViewModel = EntriesViewModel()
+    @StateObject var entryListVM = EntryListViewModel()
+    @StateObject var userVM = UserViewModel()
     
     var body: some View {
         ScrollView {
             ScrollViewReader { reader in
-                UserImage(image: user?.imageUrl ?? "", size: .big)
-                    .padding(.vertical)
-                
+                if userVM.user != nil {
+                    UserImage(image: userVM.user?.imageUrl ?? "", size: .large)
+                        .padding(.vertical)
+                } else {
+                    SignInWithAppleButton { request in
+                        request.requestedScopes = [.email, .fullName]
+                    } onCompletion: { result in
+                        switch result {
+                        case .success(let user):
+                            print("success")
+                        case .failure(let error):
+                            print(error.localizedDescription)
+                        }
+                    }
+                    .frame(height: 45)
+                    .padding()
+                }
                 reactionPicker
                 
-                if let entries = entriesViewModel.filteredEntries {
+                if let entries = entryListVM.filteredEntries {
                     LazyVGrid(columns: columns, spacing: 2) {
                         ForEach(entries, id: \.self) { entry in
                             MovieCell(movieId: entry.movieId)
@@ -30,10 +45,10 @@ struct UserView: View {
                     }
                 }
             }
-            .navigationBarTitle(user?.name ?? "", displayMode: .inline)
+            .navigationBarTitle(userVM.user?.name ?? "", displayMode: .inline)
         }
         .onAppear(perform: {
-            entriesViewModel.fetchUserEntries(for: user)
+            entryListVM.fetchUserEntries(userVM.user)
         })
     }
     
@@ -43,12 +58,14 @@ struct UserView: View {
                 .tag(UserReaction.like)
             ReactionImage(reaction: .dislike)
                 .tag(UserReaction.dislike)
-            ReactionImage(reaction: .watchlist)
-                .tag(UserReaction.watchlist)
+            if userVM.isCurrentUser {
+                ReactionImage(reaction: .watchlist)
+                    .tag(UserReaction.watchlist)
+            }
         }
         .pickerStyle(SegmentedPickerStyle())
         .onChange(of: reaction, perform: { _ in
-            entriesViewModel.filterEntries(with: reaction)
+            entryListVM.filterEntries(with: reaction)
         })
     }
 }

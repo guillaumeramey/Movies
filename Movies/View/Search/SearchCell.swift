@@ -30,7 +30,7 @@ struct SearchCell: View {
             }
         }
         .onTapGesture {
-            movieVM.fetchMovie(id: movie.id)
+            movieVM.fetchMovie(movie.id)
             showMovieDetail = true
         }
         .sheet(isPresented: $showMovieDetail) {

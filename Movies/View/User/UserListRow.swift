@@ -1,5 +1,5 @@
 //
-//  FriendRow.swift
+//  UserListRow.swift
 //  Movies
 //
 //  Created by Guillaume Ramey on 16/07/2020.
@@ -9,12 +9,12 @@
 import SwiftUI
 import KingfisherSwiftUI
 
-struct FriendRow: View {
+struct UserListRow: View {
     var user: User
     
     var body: some View {
         HStack {
-            UserImage(image: user.imageUrl)
+            UserImage(image: user.imageUrl, size: .medium)
             
             Text(user.name)
                 .font(.title2)

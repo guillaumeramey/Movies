@@ -12,9 +12,9 @@ import FirebaseFirestore
 struct Movie: Codable, Identifiable {
     let id: Int
     let runtime: Int?
-    let genres: [Genre]
-    let originalLanguage, originalTitle, overview: String
-    let tagline, title: String
+    let genres: [Genre]?
+    let originalLanguage, originalTitle, overview: String?
+    let tagline, title: String?
     let imdbID, homepage: String?
     private let _releaseDate, _posterPath: String?
     

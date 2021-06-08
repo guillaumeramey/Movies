@@ -11,17 +11,17 @@ import KingfisherSwiftUI
 
 struct MovieCell: View {
     var movieId: Int
-    @State private var showMovieDetail = false
+    @State private var showMovieView = false
     @StateObject private var movieVM = MovieViewModel()
     
     var body: some View {
         KFImage(movieVM.movie?.posterUrl)
             .placeholder { LoadingColor() }
             .resizable()
-            .onTapGesture { showMovieDetail = true }
+            .onTapGesture { showMovieView = true }
             .aspectRatio(21/29.7, contentMode: .fill)
-            .onAppear { movieVM.fetchMovie(id: movieId) }
-            .sheet(isPresented: $showMovieDetail) {
+            .onAppear { movieVM.fetchMovie(movieId) }
+            .sheet(isPresented: $showMovieView) {
                 MovieView(movieVM: movieVM)
             }
     }

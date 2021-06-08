@@ -11,7 +11,29 @@ import KingfisherSwiftUI
 
 struct UserImage: View {
     enum Size {
-        case small, big
+        case small, medium, large
+        
+        var frameWidth: CGFloat {
+            switch self {
+            case .small: return 50
+            case .medium: return 75
+            case .large: return 100
+            }
+        }
+        var strokeLineWidth: CGFloat {
+            switch self {
+            case .small: return 2
+            case .medium: return 3
+            case .large: return 4
+            }
+        }
+        var radius: CGFloat {
+            switch self {
+            case .small: return 2
+            case .medium: return 3
+            case .large: return 4
+            }
+        }
     }
     var image: String
     var size: Size = .small
@@ -20,9 +42,9 @@ struct UserImage: View {
         KFImage(URL(string: image))
             .resizable()
             .scaledToFit()
-            .frame(width: size == .small ? 50 : 100)
+            .frame(width: size.frameWidth)
             .clipShape(Circle())
-            .overlay(Circle().stroke(Color.white, lineWidth: size == .small ? 2 : 4))
-            .shadow(radius: size == .small ? 2 : 4)
+            .overlay(Circle().stroke(Color.white, lineWidth: size.strokeLineWidth))
+            .shadow(radius: size.radius)
     }
 }

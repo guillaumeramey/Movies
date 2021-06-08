@@ -16,26 +16,18 @@ struct Constants {
     
     struct Text {
         struct Title {
-            static let feed = "Movie Buddies"
+            static let entryList = "Movie Buddies"
             static let myMovies = "My movies"
             static let friends = "Friends"
             static let search = "Search a movie"
         }
         
-        struct GenreFilter {
-            static let title = "Select a genre"
-//            static let likes = "Likes"
-//            static let dislikes = "Dislikes"
-            static let all = "All"
-        }
-        
-        struct FeedCalendar {
-            static let title = "Select a period"
-            static let lastWeek = "Last week"
-            static let lastMonth = "Last month"
-            static let allTimes = "All times"
-            
-        }
+//        struct FeedCalendar {
+//            static let title = "Select a period"
+//            static let lastWeek = "Last week"
+//            static let lastMonth = "Last month"
+//            static let allTimes = "All times"
+//        }
         
         static let searchPlaceholder = "Search"
         static let like = "Like"
@@ -44,10 +36,10 @@ struct Constants {
     
     struct Images {
         struct Tab {
-            static let feed = Image(systemName: "house")
+            static let feed = Image(systemName: "film")
             static let search = Image(systemName: "magnifyingglass")
-            static let myMovies = Image(systemName: "film")
-            static let friends = Image(systemName: "person.3")
+            static let users = Image(systemName: "person.3")
+            static let currentUser = Image(systemName: "person")
         }
         
         static let like = Image(systemName: "hand.thumbsup")

@@ -17,14 +17,14 @@ class MovieViewModel: ObservableObject {
     
     // MARK: - TMDB API
     
-    func fetchMovie(id: Int) {
-        if let cachedMovie = movieCache[id] {
+    func fetchMovie(_ movieId: Int) {
+        if let cachedMovie = movieCache[movieId] {
             self.movie = cachedMovie
             return
         }
         
         let stringURL = Constants.tmdbUrl
-            + "/movie/\(id)"
+            + "/movie/\(movieId)"
             + "?api_key=\(Constants.tmdbKey)"
             + "&language=fr-FR"
                 
@@ -37,7 +37,7 @@ class MovieViewModel: ObservableObject {
             
             do {
                 let decodedMovie = try JSONDecoder().decode(Movie.self, from: data)
-                movieCache[id] = decodedMovie
+                movieCache[movieId] = decodedMovie
                 DispatchQueue.main.async {
                     self.movie = decodedMovie
                 }

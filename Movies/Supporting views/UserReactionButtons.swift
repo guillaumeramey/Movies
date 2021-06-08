@@ -10,7 +10,7 @@ import SwiftUI
 
 struct UserReactionButtons: View {
     @EnvironmentObject var movieVM: MovieViewModel
-    @EnvironmentObject var entriesViewModel: EntriesViewModel
+    @EnvironmentObject var entriesViewModel: EntryViewModel
     
     var body: some View {
         HStack(spacing: 15) {
