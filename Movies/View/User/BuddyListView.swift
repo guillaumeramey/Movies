@@ -1,5 +1,5 @@
 //
-//  UserListView.swift
+//  BuddyListView.swift
 //  Movies
 //
 //  Created by Guillaume Ramey on 16/07/2020.
@@ -8,9 +8,10 @@
 
 import SwiftUI
 
-struct UserListView: View {
-    @ObservedObject var userListVM = UserListViewModel()
-    @ObservedObject var userVM = UserViewModel()
+struct BuddyListView: View {
+    @ObservedObject var buddyListVM = BuddyListViewModel()
+    @EnvironmentObject var userVM: UserViewModel
+    private var buddyVM = BuddyViewModel()
     
     var body: some View {
 //        let affinities = viewModel.users.map { $0.calculateAffinity(with: user) }
@@ -18,11 +19,11 @@ struct UserListView: View {
         
         NavigationView {
             List {
-                ForEach(userListVM.users) { user in
-                    NavigationLink(destination: UserView(userVM: userVM)) {
-                        UserListRow(user: user)
+                ForEach(buddyListVM.buddies) { buddy in
+                    NavigationLink(destination: BuddyView(buddyVM: buddyVM)) {
+                        BuddyRow(buddy: buddy)
                     }
-                    .onAppear { userVM.user = user }
+                    .onAppear { buddyVM.buddy = buddy }
                 }
                 
 //                ForEach(ranks, id: \.self) { rank in
@@ -44,16 +45,16 @@ struct UserListView: View {
 //                    }
 //                }
             }
-            .navigationBarTitle(Constants.Text.Title.friends, displayMode: .inline)
+            .navigationBarTitle(Constants.Text.Title.buddies, displayMode: .inline)
         }
         .onAppear() {
-            userListVM.fetchUsers()
+            buddyListVM.fetchBuddies(of: userVM.user)
         }
     }
 }
 
 struct FriendsView_Previews: PreviewProvider {
     static var previews: some View {
-        UserListView()
+        BuddyListView()
     }
 }

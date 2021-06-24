@@ -1,5 +1,5 @@
 //
-//  UserView.swift
+//  BuddyView.swift
 //  Movies
 //
 //  Created by Guillaume Ramey on 18/07/2020.
@@ -9,47 +9,31 @@
 import SwiftUI
 import AuthenticationServices
 
-struct UserView: View {
+struct BuddyView: View {
     private let columns: [GridItem] = Array(repeating: .init(.flexible(), spacing: 2), count: 3)
+    var buddyVM = BuddyViewModel()
     @State private var reaction: UserReaction = .like
     @StateObject var entryListVM = EntryListViewModel()
-    @EnvironmentObject var userVM: UserViewModel
     
     var body: some View {
         ScrollView {
             ScrollViewReader { reader in
-                if userVM.user != nil {
-                    UserImage(image: userVM.user?.imageUrl ?? "", size: .large)
-                        .padding(.vertical)
-                } else {
-                    SignInWithAppleButton { request in
-                        request.requestedScopes = [.email, .fullName]
-                    } onCompletion: { result in
-                        switch result {
-                        case .success(let user):
-                            print("success")
-                        case .failure(let error):
-                            print(error.localizedDescription)
-                        }
-                    }
-                    .frame(height: 45)
-                    .padding()
-                }
+                UserImage(image: buddyVM.buddy?.imageUrl ?? "", size: .large)
+                    .padding(.vertical)
+                
                 reactionPicker
                 
-                if let entries = entryListVM.filteredEntries {
-                    LazyVGrid(columns: columns, spacing: 2) {
-                        ForEach(entries, id: \.self) { entry in
-                            MovieCell(movieId: entry.mediaId)
-                        }
+                LazyVGrid(columns: columns, spacing: 2) {
+                    ForEach(entryListVM.filteredEntries, id: \.self) { entry in
+                        MovieCell(movieId: entry.mediaId)
                     }
                 }
             }
-            .navigationBarTitle(userVM.user?.name ?? "???", displayMode: .inline)
+            .navigationBarTitle(buddyVM.buddy?.name ?? "???", displayMode: .inline)
             .navigationBarItems(trailing: editButton)
         }
         .onAppear(perform: {
-            entryListVM.fetchUserEntries(userVM.user)
+            entryListVM.fetchUserEntries(buddyVM.buddy)
         })
     }
     
@@ -67,8 +51,6 @@ struct UserView: View {
                 .tag(UserReaction.like)
             ReactionImage(reaction: .dislike)
                 .tag(UserReaction.dislike)
-            ReactionImage(reaction: .watchlist)
-                .tag(UserReaction.watchlist)
         }
         .pickerStyle(SegmentedPickerStyle())
         .onChange(of: reaction, perform: { _ in

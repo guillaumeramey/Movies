@@ -10,7 +10,7 @@ import SwiftUI
 
 struct Reactions: View {
     var movie: Movie
-    @ObservedObject var usersViewModel = UserListViewModel()
+    @ObservedObject var buddyListViewModel = BuddyListViewModel()
     
     var body: some View {
         HStack {

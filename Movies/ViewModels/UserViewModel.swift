@@ -12,30 +12,23 @@ import FirebaseFirestore
 
 class UserViewModel: ObservableObject {
     private var db = Firestore.firestore()
-    private var userCollection = "users"
-    var isCurrentUser: Bool {
-        user?.id == Auth.auth().currentUser?.uid
-    }
     @Published var user: User?
     
-    func fetchUser(_ userId: String = Auth.auth().currentUser?.uid ?? "") {
+    func fetchCurrentUser() {
+        guard let userId = Auth.auth().currentUser?.uid else { return }
         db.collection("users").document(userId).getDocument { documentSnapshot, error in
             guard error == nil else {
-                print("Error getting documents:", error?.localizedDescription ?? "")
+                print("Error A fetching current user id: ", userId, "\n", error?.localizedDescription ?? "")
                 return
             }
             
             DispatchQueue.main.async {
-                self.user = try? documentSnapshot?.data(as: User.self)
+                do {
+                    self.user = try documentSnapshot?.data(as: User.self)
+                } catch {
+                    print("Error B fetching current user id: ", userId, "\n", error.localizedDescription)
+                }
             }
         }
     }
-    
-    //    func likes(of user: User) -> [String] {
-    //        user.entries.filter { $0.reaction == .like }.map { $0.movieId }
-    //    }
-    //
-    //    func dislikes(of user: User) -> [String] {
-    //        user.entries.filter { $0.reaction == .dislike }.map { $0.movieId }
-    //    }
 }

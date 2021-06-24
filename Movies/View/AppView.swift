@@ -8,9 +8,7 @@
 
 import SwiftUI
 
-struct AppView: View {
-    var userVM = UserViewModel()
-    
+struct AppView: View {    
     var body: some View {
         TabView {
             EntryListView()
@@ -19,13 +17,12 @@ struct AppView: View {
             SearchView()
                 .tabItem { Constants.Images.Tab.search}
             
-            UserListView()
+            BuddyListView()
                 .tabItem { Constants.Images.Tab.users }
             
             NavigationView {
-                UserView(userVM: userVM)
+                UserView()
             }
-            .onAppear { userVM.fetchUser() }
             .tabItem { Constants.Images.Tab.currentUser }
         }
     }

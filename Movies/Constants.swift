@@ -18,7 +18,7 @@ struct Constants {
         struct Title {
             static let entryList = "Movie Buddies"
             static let myMovies = "My movies"
-            static let friends = "Friends"
+            static let buddies = "Buddies"
             static let search = "Search a movie"
         }
         
@@ -48,15 +48,12 @@ struct Constants {
         static let dislikeFill = Image(systemName: "hand.thumbsdown.fill")
         static let watchlist = Image(systemName: "bookmark")
         static let watchlistFill = Image(systemName: "bookmark.fill")
-        
         static let affinity = Image(systemName: "flame")
-        
         static let filter = Image(systemName: "line.horizontal.3.decrease")
         static let calendar = Image(systemName: "calendar")
-        
         static let add = Image(systemName: "plus.circle")
-        
         static let search = Image(systemName: "magnifyingglass")
+        static let edit = Image(systemName: "pencil")
     }
     
     struct Colors {

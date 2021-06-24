@@ -9,8 +9,9 @@
 import SwiftUI
 
 struct EntryListView: View {
+    @EnvironmentObject var userVM: UserViewModel
     @StateObject var entryListVM = EntryListViewModel()
-    @StateObject var userListVM = UserListViewModel()
+    @StateObject var buddyListVM = BuddyListViewModel()
     
     init() {
         UINavigationBar.appearance().titleTextAttributes = [.font : UIFont(name: "Cookie-Regular", size: 34)!]
@@ -23,13 +24,16 @@ struct EntryListView: View {
                     Section(header: Text("Last day")) {
                         ForEach(entryListVM.lastDayEntries, id: \.self) { entries in
                             EntryListRow(entries: entries)
+                                .listRowInsets(EdgeInsets())
                         }
                     }
+                    .padding(.vertical)
                 }
                 if !entryListVM.lastWeekEntries.isEmpty {
                     Section(header: Text("Last week")) {
                         ForEach(entryListVM.lastWeekEntries, id: \.self) { entries in
                             EntryListRow(entries: entries)
+                                .listRowInsets(EdgeInsets())
                         }
                     }
                 }
@@ -37,15 +41,17 @@ struct EntryListView: View {
                     Section(header: Text("Before last week")) {
                         ForEach(entryListVM.beforeLastWeekEntries, id: \.self) { entries in
                             EntryListRow(entries: entries)
+                                .listRowInsets(EdgeInsets())
                         }
                     }
                 }
             }
+            .listStyle(GroupedListStyle())
             .navigationBarTitle(Constants.Text.Title.entryList, displayMode: .inline)
         }
         .onAppear() {
             entryListVM.fetchEntries()
-            userListVM.fetchUsers()
+            buddyListVM.fetchBuddies(of: userVM.user)
         }
     }
 }

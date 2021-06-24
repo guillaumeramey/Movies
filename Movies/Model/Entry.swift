@@ -17,6 +17,6 @@ enum UserReaction: String, Codable {
 struct Entry: Codable, Hashable {
     @ServerTimestamp var createdTime: Timestamp?
     let userId: String
-    let movieId: Int
+    let mediaId: Int
     let reaction: UserReaction
 }

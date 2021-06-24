@@ -12,7 +12,6 @@ import FirebaseFirestore
 
 class EntryListViewModel: ObservableObject {
     private var db = Firestore.firestore()
-    private var entryCollection = "entries"
     private var entries = [Entry]()
     @Published var filteredEntries = [Entry]()
     @Published var lastDayEntries = [[Entry]]()
@@ -20,7 +19,7 @@ class EntryListViewModel: ObservableObject {
     @Published var beforeLastWeekEntries = [[Entry]]()
     
     func fetchEntries() {
-        let query = db.collection(entryCollection)
+        let query = db.collectionGroup("entries")
             .order(by: "createdTime", descending: true)
         
         query.getDocuments() { querySnapshot, error in
@@ -46,12 +45,12 @@ class EntryListViewModel: ObservableObject {
     func fetchUserEntries(_ user: User?) {
         guard let userId = user?.id ?? Auth.auth().currentUser?.uid else { return }
         
-        db.collection(entryCollection)
+        db.collectionGroup("entries")
             .whereField("userId", isEqualTo: userId)
             .order(by: "createdTime", descending: true)
-            .getDocuments() { querySnapshot, error in
+            .addSnapshotListener { querySnapshot, error in
                 guard error == nil else {
-                    print("Error getting entries:", error?.localizedDescription ?? "")
+                    print("Error fetching entries:", error?.localizedDescription ?? "")
                     return
                 }
                 
@@ -76,24 +75,27 @@ class EntryListViewModel: ObservableObject {
         
         let lastDay = Timestamp().dateValue().addingTimeInterval(-86400)
         let lastWeek = Timestamp().dateValue().addingTimeInterval(-86400 * 7)
+        let defaultDate = Date(timeIntervalSince1970: 0)
         
         DispatchQueue.main.async {
+            self.lastDayEntries = []
+            self.lastWeekEntries = []
+            self.beforeLastWeekEntries = []
+            
             userIds.forEach { userId in
                 let userLikes = self.entries.filter { $0.userId == userId && $0.reaction == .like }
                 let userDislikes = self.entries.filter { $0.userId == userId && $0.reaction == .dislike }
-            
+                
                 // Last day
                 let lastDayLikes = userLikes.filter {
-                    guard let createdTime = $0.createdTime?.dateValue() else { return false }
-                    return createdTime > lastDay
+                    $0.createdTime?.dateValue() ?? defaultDate > lastDay
                 }
                 if !lastDayLikes.isEmpty {
                     self.lastDayEntries.append(lastDayLikes)
                 }
                 
                 let lastDayDislikes = userDislikes.filter {
-                    guard let createdTime = $0.createdTime?.dateValue() else { return false }
-                    return createdTime > lastDay
+                    $0.createdTime?.dateValue() ?? defaultDate  > lastDay
                 }
                 if !lastDayDislikes.isEmpty {
                     self.lastDayEntries.append(lastDayDislikes)
@@ -101,16 +103,16 @@ class EntryListViewModel: ObservableObject {
                 
                 // Last week
                 let lastWeekLikes = userLikes.filter {
-                    guard let createdTime = $0.createdTime?.dateValue() else { return false }
-                    return createdTime <= lastDay && createdTime > lastWeek
+                    $0.createdTime?.dateValue() ?? defaultDate <= lastDay
+                        && $0.createdTime?.dateValue() ?? defaultDate > lastWeek
                 }
                 if !lastWeekLikes.isEmpty {
                     self.lastWeekEntries.append(lastWeekLikes)
                 }
                 
                 let lastWeekDislikes = userDislikes.filter {
-                    guard let createdTime = $0.createdTime?.dateValue() else { return false }
-                    return createdTime <= lastDay && createdTime > lastWeek
+                    $0.createdTime?.dateValue() ?? defaultDate <= lastDay
+                        && $0.createdTime?.dateValue() ?? defaultDate > lastWeek
                 }
                 if !lastWeekDislikes.isEmpty {
                     self.lastWeekEntries.append(lastWeekDislikes)
@@ -118,16 +120,14 @@ class EntryListViewModel: ObservableObject {
                 
                 // Before last week
                 let beforeLastWeekLikes = userLikes.filter {
-                    guard let createdTime = $0.createdTime?.dateValue() else { return false }
-                    return createdTime <= lastWeek
+                    $0.createdTime?.dateValue() ?? defaultDate <= lastWeek
                 }
                 if !beforeLastWeekLikes.isEmpty {
                     self.beforeLastWeekEntries.append(beforeLastWeekLikes)
                 }
                 
                 let beforeLastWeekDislikes = userDislikes.filter {
-                    guard let createdTime = $0.createdTime?.dateValue() else { return false }
-                    return createdTime <= lastWeek
+                    $0.createdTime?.dateValue() ?? defaultDate <= lastWeek
                 }
                 if !beforeLastWeekDislikes.isEmpty {
                     self.beforeLastWeekEntries.append(beforeLastWeekDislikes)

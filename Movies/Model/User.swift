@@ -15,34 +15,11 @@ class User: Identifiable, Equatable, Codable, ObservableObject {
     @DocumentID var id: String?
     var name, imageUrl: String
     var entries: [Entry]?
+    var buddies: [String]?
     
     static func == (lhs: User, rhs: User) -> Bool {
         lhs.id == rhs.id
     }
-    
-    init(id: String, name: String, imageUrl: String) {
-        self.id = id
-        self.name = name
-        self.imageUrl = imageUrl
-    }
-    
-    init(from queryDocumentSnapshot: QueryDocumentSnapshot) {
-        let data = queryDocumentSnapshot.data()
-        id = queryDocumentSnapshot.documentID
-        name = data["name"] as? String ?? ""
-        imageUrl = data["imageUrl"] as? String ?? ""
-//        likesCount = data["likes"] as? Int ?? 0
-//        dislikesCount = data["dislikes"] as? Int ?? 0
-    }
-    
-//    init(from documentSnapshot: DocumentSnapshot) {
-//        let data = documentSnapshot.data()
-//        id = documentSnapshot.documentID
-//        name = data?["name"] as? String ?? ""
-//        imageUrl = data?["imageUrl"] as? String ?? ""
-//        likesCount = data?["likes"] as? Int ?? 0
-//        dislikesCount = data?["dislikes"] as? Int ?? 0
-//    }
     
 //    func calculateAffinity(with user: User) -> (rank: Int, title: String, color: Color) {
 //        let likes = Set(entries.filter { $0.reaction == .like }.map { $0.movieId })
@@ -71,9 +48,5 @@ class User: Identifiable, Equatable, Codable, ObservableObject {
 //        let likes = entries.filter { $0.reaction == .like }.compactMap { $0.movie }.compactMap { $0.genres }
 //        let dislikes = entries.filter { $0.reaction == .dislike }.compactMap { $0.movie }.compactMap { $0.genres }
 //        return (likes + dislikes).mostFrequent() ?? ""
-//    }
-    
-//    func reaction(to movie: Movie) -> UserReaction? {
-//        entries.first { $0.movieId == movie.id }?.reaction
 //    }
 }
