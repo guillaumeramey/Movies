@@ -29,7 +29,9 @@ class BuddyListViewModel: ObservableObject {
             }
             
             DispatchQueue.main.async {
-                self.buddies = documents.compactMap { try? $0.data(as: User.self) }
+                self.buddies = documents.compactMap {
+                    try? $0.data(as: User.self)
+                }
             }
         }
     }

@@ -1,5 +1,5 @@
 //
-//  SearchCell.swift
+//  SearchMovieCell.swift
 //  Movie Buddies
 //
 //  Created by Guillaume Ramey on 26/05/2021.
@@ -9,7 +9,7 @@
 import SwiftUI
 import KingfisherSwiftUI
 
-struct SearchCell: View {
+struct SearchMovieCell: View {
     var movie: SearchMovie.Result
     @State private var showMovieDetail = false
     @StateObject private var movieVM = MovieViewModel()

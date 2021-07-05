@@ -30,7 +30,7 @@
 		A448DB0F265D34C400B707D8 /* BuddyListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A448DB0E265D34C400B707D8 /* BuddyListViewModel.swift */; };
 		A448DB12265D466600B707D8 /* MovieViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A448DB11265D466600B707D8 /* MovieViewModel.swift */; };
 		A448DB14265E46AA00B707D8 /* EntryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A448DB13265E46AA00B707D8 /* EntryViewModel.swift */; };
-		A448DB18265E91B900B707D8 /* SearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A448DB17265E91B900B707D8 /* SearchCell.swift */; };
+		A448DB18265E91B900B707D8 /* SearchMovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A448DB17265E91B900B707D8 /* SearchMovieCell.swift */; };
 		A46B8F2424B0EDC500E4D98E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A46B8F2324B0EDC500E4D98E /* AppDelegate.swift */; };
 		A46B8F2624B0EDC500E4D98E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A46B8F2524B0EDC500E4D98E /* SceneDelegate.swift */; };
 		A46B8F2824B0EDC500E4D98E /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A46B8F2724B0EDC500E4D98E /* SearchView.swift */; };
@@ -46,9 +46,6 @@
 		A48395FF2684CCE600102B6C /* ReactionPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = A48395FE2684CCE600102B6C /* ReactionPicker.swift */; };
 		A48955E62662A28700112953 /* MovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A48955E52662A28700112953 /* MovieCell.swift */; };
 		A48955EC2664D82700112953 /* SearchMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = A48955EB2664D82700112953 /* SearchMovie.swift */; };
-		A48955EF2665111000112953 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = A48955EE2665111000112953 /* FirebaseAuth */; };
-		A48955F12665111000112953 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = A48955F02665111000112953 /* FirebaseFirestore */; };
-		A48955F32665111000112953 /* FirebaseFirestoreSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = A48955F22665111000112953 /* FirebaseFirestoreSwift-Beta */; };
 		A48955F6266622EE00112953 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A48955F5266622EE00112953 /* SearchViewModel.swift */; };
 		A48955F826663C3100112953 /* LoadingSearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A48955F726663C3100112953 /* LoadingSearchCell.swift */; };
 		A48955FB2666898B00112953 /* SearchPerson.swift in Sources */ = {isa = PBXBuildFile; fileRef = A48955FA2666898B00112953 /* SearchPerson.swift */; };
@@ -60,10 +57,17 @@
 		A48CB9C224CC3962002B419C /* KingfisherSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = A48CB9C124CC3962002B419C /* KingfisherSwiftUI */; };
 		A4AEB1092656BC810033F7B3 /* UserImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4AEB1082656BC810033F7B3 /* UserImage.swift */; };
 		A4AEB10B26579C000033F7B3 /* Reactions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4AEB10A26579C000033F7B3 /* Reactions.swift */; };
+		A4BA79CA2693522200F9CE65 /* SearchPersonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4BA79C92693522200F9CE65 /* SearchPersonCell.swift */; };
 		A4C62A5D24BCE49E0015092C /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C62A5C24BCE49E0015092C /* Movie.swift */; };
 		A4C62A6324BE094F0015092C /* MovieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C62A6224BE094F0015092C /* MovieView.swift */; };
 		A4C62A6924BE127F0015092C /* SearchData.json in Resources */ = {isa = PBXBuildFile; fileRef = A4C62A6824BE127F0015092C /* SearchData.json */; };
 		A4C62A6B24BE12960015092C /* MovieData.json in Resources */ = {isa = PBXBuildFile; fileRef = A4C62A6A24BE12960015092C /* MovieData.json */; };
+		A4D338D3268E03310009CCFB /* FirebaseFirestoreSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = A4D338D2268E03310009CCFB /* FirebaseFirestoreSwift-Beta */; };
+		A4D338D5268E03310009CCFB /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = A4D338D4268E03310009CCFB /* FirebaseStorage */; };
+		A4D338D7268E03310009CCFB /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = A4D338D6268E03310009CCFB /* FirebaseAuth */; };
+		A4D338D9268E03310009CCFB /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = A4D338D8268E03310009CCFB /* FirebaseFirestore */; };
+		A4D338DB268E03310009CCFB /* FirebaseStorageSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = A4D338DA268E03310009CCFB /* FirebaseStorageSwift-Beta */; };
+		A4D338DD268F4AA60009CCFB /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4D338DC268F4AA60009CCFB /* ImagePicker.swift */; };
 		A4D47C9D24CB753C00465737 /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4D47C9C24CB753C00465737 /* Cache.swift */; };
 		A4FE01FB26551A34009E8A57 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4FE01FA26551A34009E8A57 /* Constants.swift */; };
 /* End PBXBuildFile section */
@@ -92,7 +96,7 @@
 		A448DB0E265D34C400B707D8 /* BuddyListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuddyListViewModel.swift; sourceTree = "<group>"; };
 		A448DB11265D466600B707D8 /* MovieViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieViewModel.swift; sourceTree = "<group>"; };
 		A448DB13265E46AA00B707D8 /* EntryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryViewModel.swift; sourceTree = "<group>"; };
-		A448DB17265E91B900B707D8 /* SearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCell.swift; sourceTree = "<group>"; };
+		A448DB17265E91B900B707D8 /* SearchMovieCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMovieCell.swift; sourceTree = "<group>"; };
 		A46B8F2024B0EDC500E4D98E /* Movie Buddies.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Movie Buddies.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A46B8F2324B0EDC500E4D98E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A46B8F2524B0EDC500E4D98E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -121,10 +125,12 @@
 		A48956062668C05300112953 /* BuddyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuddyViewModel.swift; sourceTree = "<group>"; };
 		A4AEB1082656BC810033F7B3 /* UserImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserImage.swift; sourceTree = "<group>"; };
 		A4AEB10A26579C000033F7B3 /* Reactions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reactions.swift; sourceTree = "<group>"; };
+		A4BA79C92693522200F9CE65 /* SearchPersonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPersonCell.swift; sourceTree = "<group>"; };
 		A4C62A5C24BCE49E0015092C /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		A4C62A6224BE094F0015092C /* MovieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieView.swift; sourceTree = "<group>"; };
 		A4C62A6824BE127F0015092C /* SearchData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = SearchData.json; sourceTree = "<group>"; };
 		A4C62A6A24BE12960015092C /* MovieData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = MovieData.json; sourceTree = "<group>"; };
+		A4D338DC268F4AA60009CCFB /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		A4D47C9C24CB753C00465737 /* Cache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
 		A4FE01FA26551A34009E8A57 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -135,9 +141,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				A48CB9C224CC3962002B419C /* KingfisherSwiftUI in Frameworks */,
-				A48955F32665111000112953 /* FirebaseFirestoreSwift-Beta in Frameworks */,
-				A48955EF2665111000112953 /* FirebaseAuth in Frameworks */,
-				A48955F12665111000112953 /* FirebaseFirestore in Frameworks */,
+				A4D338D3268E03310009CCFB /* FirebaseFirestoreSwift-Beta in Frameworks */,
+				A4D338D5268E03310009CCFB /* FirebaseStorage in Frameworks */,
+				A4D338D9268E03310009CCFB /* FirebaseFirestore in Frameworks */,
+				A4D338D7268E03310009CCFB /* FirebaseAuth in Frameworks */,
+				A4D338DB268E03310009CCFB /* FirebaseStorageSwift-Beta in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -232,6 +240,7 @@
 				A4AEB10A26579C000033F7B3 /* Reactions.swift */,
 				A48956002666BB7900112953 /* LoadingColor.swift */,
 				A48395FE2684CCE600102B6C /* ReactionPicker.swift */,
+				A4D338DC268F4AA60009CCFB /* ImagePicker.swift */,
 			);
 			path = "Supporting views";
 			sourceTree = "<group>";
@@ -249,7 +258,8 @@
 			isa = PBXGroup;
 			children = (
 				A46B8F2724B0EDC500E4D98E /* SearchView.swift */,
-				A448DB17265E91B900B707D8 /* SearchCell.swift */,
+				A448DB17265E91B900B707D8 /* SearchMovieCell.swift */,
+				A4BA79C92693522200F9CE65 /* SearchPersonCell.swift */,
 				A48955F726663C3100112953 /* LoadingSearchCell.swift */,
 			);
 			path = Search;
@@ -264,15 +274,14 @@
 			path = EntryList;
 			sourceTree = "<group>";
 		};
-		A48956052667E52F00112953 /* User */ = {
+		A48956052667E52F00112953 /* Buddies */ = {
 			isa = PBXGroup;
 			children = (
 				A411F52524C0CD040031D028 /* BuddyListView.swift */,
 				A411F52924C0D01F0031D028 /* BuddyRow.swift */,
-				A48395FA2684C9C700102B6C /* UserView.swift */,
 				A47F48F424C2F24400DC2432 /* BuddyView.swift */,
 			);
-			path = User;
+			path = Buddies;
 			sourceTree = "<group>";
 		};
 		A4C62A6724BE12430015092C /* Resources */ = {
@@ -303,7 +312,8 @@
 				A411F52724C0CE7B0031D028 /* AppView.swift */,
 				A48956042667E4AD00112953 /* EntryList */,
 				A48955F926663C8700112953 /* Search */,
-				A48956052667E52F00112953 /* User */,
+				A48956052667E52F00112953 /* Buddies */,
+				A48395FA2684C9C700102B6C /* UserView.swift */,
 				A4C62A6224BE094F0015092C /* MovieView.swift */,
 				A48955E52662A28700112953 /* MovieCell.swift */,
 				A48955FE2666965A00112953 /* PersonView.swift */,
@@ -330,9 +340,11 @@
 			name = "Movie Buddies";
 			packageProductDependencies = (
 				A48CB9C124CC3962002B419C /* KingfisherSwiftUI */,
-				A48955EE2665111000112953 /* FirebaseAuth */,
-				A48955F02665111000112953 /* FirebaseFirestore */,
-				A48955F22665111000112953 /* FirebaseFirestoreSwift-Beta */,
+				A4D338D2268E03310009CCFB /* FirebaseFirestoreSwift-Beta */,
+				A4D338D4268E03310009CCFB /* FirebaseStorage */,
+				A4D338D6268E03310009CCFB /* FirebaseAuth */,
+				A4D338D8268E03310009CCFB /* FirebaseFirestore */,
+				A4D338DA268E03310009CCFB /* FirebaseStorageSwift-Beta */,
 			);
 			productName = Movies;
 			productReference = A46B8F2024B0EDC500E4D98E /* Movie Buddies.app */;
@@ -364,7 +376,7 @@
 			mainGroup = A46B8F1724B0EDC500E4D98E;
 			packageReferences = (
 				A48CB9C024CC3962002B419C /* XCRemoteSwiftPackageReference "Kingfisher" */,
-				A48955ED2665111000112953 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				A4D338D1268E03310009CCFB /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = A46B8F2124B0EDC500E4D98E /* Products */;
 			projectDirPath = "";
@@ -407,6 +419,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A4D338DD268F4AA60009CCFB /* ImagePicker.swift in Sources */,
 				A48955FB2666898B00112953 /* SearchPerson.swift in Sources */,
 				A4AEB1092656BC810033F7B3 /* UserImage.swift in Sources */,
 				A48955FD266690EF00112953 /* PersonCell.swift in Sources */,
@@ -428,9 +441,10 @@
 				A411F54A24C105C30031D028 /* ScaledFont.swift in Sources */,
 				A48955E62662A28700112953 /* MovieCell.swift in Sources */,
 				A4FE01FB26551A34009E8A57 /* Constants.swift in Sources */,
+				A4BA79CA2693522200F9CE65 /* SearchPersonCell.swift in Sources */,
 				A47F48F524C2F24400DC2432 /* BuddyView.swift in Sources */,
 				A46B8F2824B0EDC500E4D98E /* SearchView.swift in Sources */,
-				A448DB18265E91B900B707D8 /* SearchCell.swift in Sources */,
+				A448DB18265E91B900B707D8 /* SearchMovieCell.swift in Sources */,
 				A448DB06265D0C7000B707D8 /* Entry.swift in Sources */,
 				A48956012666BB7900112953 /* LoadingColor.swift in Sources */,
 				A4C62A5D24BCE49E0015092C /* Movie.swift in Sources */,
@@ -648,14 +662,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		A48955ED2665111000112953 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 8.0.0;
-			};
-		};
 		A48CB9C024CC3962002B419C /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
@@ -664,28 +670,46 @@
 				minimumVersion = 5.14.1;
 			};
 		};
+		A4D338D1268E03310009CCFB /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.2.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		A48955EE2665111000112953 /* FirebaseAuth */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = A48955ED2665111000112953 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseAuth;
-		};
-		A48955F02665111000112953 /* FirebaseFirestore */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = A48955ED2665111000112953 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseFirestore;
-		};
-		A48955F22665111000112953 /* FirebaseFirestoreSwift-Beta */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = A48955ED2665111000112953 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = "FirebaseFirestoreSwift-Beta";
-		};
 		A48CB9C124CC3962002B419C /* KingfisherSwiftUI */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = A48CB9C024CC3962002B419C /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = KingfisherSwiftUI;
+		};
+		A4D338D2268E03310009CCFB /* FirebaseFirestoreSwift-Beta */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A4D338D1268E03310009CCFB /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = "FirebaseFirestoreSwift-Beta";
+		};
+		A4D338D4268E03310009CCFB /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A4D338D1268E03310009CCFB /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseStorage;
+		};
+		A4D338D6268E03310009CCFB /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A4D338D1268E03310009CCFB /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		A4D338D8268E03310009CCFB /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A4D338D1268E03310009CCFB /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		A4D338DA268E03310009CCFB /* FirebaseStorageSwift-Beta */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A4D338D1268E03310009CCFB /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = "FirebaseStorageSwift-Beta";
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -18,7 +18,7 @@ struct BuddyView: View {
     var body: some View {
         ScrollView {
             ScrollViewReader { reader in
-                UserImage(image: buddyVM.buddy?.imageUrl ?? "", size: .large)
+                UserImage(url: buddyVM.buddy?.imageURL, size: .large)
                     .padding(.vertical)
                 
                 reactionPicker

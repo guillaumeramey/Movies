@@ -20,9 +20,9 @@ struct EntryListRow: View {
         VStack {
             if let buddy = buddyVM.buddy {
                 HStack {
-                    UserImage(image: buddy.imageUrl, size: .small)
+                    UserImage(url: buddy.imageURL, size: .small)
                     
-                    Text(buddy.name)
+                    Text(buddy.name ?? "???")
                         .fontWeight(.bold)
                         + Text(entries.first?.reaction == .like ? " a aimé " : " n'a pas aimé ")
                     

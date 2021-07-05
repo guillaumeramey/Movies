@@ -22,7 +22,7 @@ struct SearchPerson: Codable {
     // MARK: - Result
     struct Result: Codable, Identifiable {
         let id: Int
-        let knownFor: [KnownFor]
+        let knownFor: [KnownFor]?
         let name: String
         
         private let _profilePath: String?
@@ -44,7 +44,6 @@ struct SearchPerson: Codable {
         let id: Int
         let originalTitle, posterPath: String?
         let releaseDate: String?
-        let genreIDS: [Int]?
         let title: String?
         let overview: String?
         
@@ -53,7 +52,6 @@ struct SearchPerson: Codable {
             case posterPath = "poster_path"
             case id
             case releaseDate = "release_date"
-            case genreIDS = "genre_ids"
             case title
             case overview
         }

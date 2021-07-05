@@ -29,7 +29,8 @@ struct Constants {
 //            static let allTimes = "All times"
 //        }
         
-        static let searchPlaceholder = "Search"
+        static let searchMoviePlaceholder = "Search movie"
+        static let searchPersonPlaceholder = "Search person"
         static let like = "Like"
         static let dislike = "Dislike"
     }
@@ -38,7 +39,7 @@ struct Constants {
         struct Tab {
             static let feed = Image(systemName: "film")
             static let search = Image(systemName: "magnifyingglass")
-            static let users = Image(systemName: "person.3")
+            static let buddies = Image(systemName: "person.3")
             static let currentUser = Image(systemName: "person")
         }
         

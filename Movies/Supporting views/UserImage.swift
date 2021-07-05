@@ -35,16 +35,27 @@ struct UserImage: View {
             }
         }
     }
-    var image: String
+    var url: URL?
+    var image: Image?
     var size: Size = .small
     
     var body: some View {
-        KFImage(URL(string: image))
-            .resizable()
-            .scaledToFit()
-            .frame(width: size.frameWidth)
-            .clipShape(Circle())
-            .overlay(Circle().stroke(Color.white, lineWidth: size.strokeLineWidth))
-            .shadow(radius: size.radius)
+        if let image = image {
+            image
+                .resizable()
+                .scaledToFit()
+                .frame(width: size.frameWidth)
+                .clipShape(Circle())
+                .overlay(Circle().stroke(Color.white, lineWidth: size.strokeLineWidth))
+                .shadow(radius: size.radius)
+        } else {
+            KFImage(url)
+                .resizable()
+                .scaledToFit()
+                .frame(width: size.frameWidth)
+                .clipShape(Circle())
+                .overlay(Circle().stroke(Color.white, lineWidth: size.strokeLineWidth))
+                .shadow(radius: size.radius)
+        }
     }
 }

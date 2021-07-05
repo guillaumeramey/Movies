@@ -20,7 +20,6 @@ class BuddyViewModel: ObservableObject {
                 print("Error A fetching user id: ", id, "\n", error?.localizedDescription ?? "")
                 return
             }
-            
             DispatchQueue.main.async {
                 do {
                     self.buddy = try documentSnapshot?.data(as: User.self)

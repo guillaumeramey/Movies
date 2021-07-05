@@ -28,9 +28,11 @@ struct PersonView: View {
             }
             .padding()
             
-            LazyVGrid(columns: columns, spacing: 2) {
-                ForEach(person.knownFor) { movie in
-                    MovieCell(movieId: movie.id)
+            if let knownFor = person.knownFor {
+                LazyVGrid(columns: columns, spacing: 2) {
+                    ForEach(knownFor) { movie in
+                        MovieCell(movieId: movie.id)
+                    }
                 }
             }
         }

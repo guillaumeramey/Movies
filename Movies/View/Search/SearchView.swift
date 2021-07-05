@@ -47,15 +47,29 @@ struct SearchView: View {
                     Spacer()
                 }
             } else {
-                if searchVM.searchMovieResults.isEmpty {
-                    List {
-                        ForEach(0 ..< 5) { _ in
-                            LoadingSearchMovieCell()
+                if trendingMediaType == .movie {
+                    if searchVM.searchMovieResults.isEmpty {
+                        List {
+                            ForEach(0 ..< 5) { _ in
+                                LoadingSearchMovieCell()
+                            }
+                        }
+                    } else {
+                        List(searchVM.searchMovieResults) { movie in
+                            SearchMovieCell(movie: movie)
                         }
                     }
                 } else {
-                    List(searchVM.searchMovieResults) { movie in
-                        SearchCell(movie: movie)
+                    if searchVM.searchPersonResults.isEmpty {
+                        List {
+                            ForEach(0 ..< 5) { _ in
+                                LoadingSearchMovieCell()
+                            }
+                        }
+                    } else {
+                        List(searchVM.searchPersonResults) { person in
+                            SearchPersonCell(person: person)
+                        }
                     }
                 }
             }
@@ -69,17 +83,20 @@ struct SearchView: View {
     var searchTextField: some View {
         HStack {
             Constants.Images.search
-                .foregroundColor(Color.primary.opacity(0.5))
+                .foregroundColor(Color(.systemGray))
             
             ZStack(alignment: .leading) {
+                // manual placeholder to change color
                 if searchVM.searchString.isEmpty {
-                    Text(Constants.Text.searchPlaceholder)
-                        .foregroundColor(Color.primary.opacity(0.5))
+                    if trendingMediaType == .movie {
+                        Text(Constants.Text.searchMoviePlaceholder)
+                            .foregroundColor(Color(.systemGray))
+                    } else {
+                        Text(Constants.Text.searchPersonPlaceholder)
+                            .foregroundColor(Color(.systemGray))
+                    }
                 }
-                TextField("",
-                          text: $searchVM.searchString,
-                          onEditingChanged: { isEditing = $0 },
-                          onCommit: search)
+                TextField("", text: $searchVM.searchString, onEditingChanged: { isEditing = $0 }, onCommit: search)
                     .keyboardType(.webSearch)
                     .autocapitalization(.none)
             }
@@ -89,13 +106,13 @@ struct SearchView: View {
                     searchVM.searchString = ""
                 }) {
                     Image(systemName: "multiply.circle.fill")
-                        .foregroundColor(Color.primary.opacity(0.5))
+                        .foregroundColor(Color(.systemGray))
                 }
             }
         }
         .frame(height: 35)
         .padding(.horizontal, 5)
-        .background(Color.primary.opacity(0.1))
+        .background(Color(.systemGray6))
         .cornerRadius(6)
     }
     
@@ -106,11 +123,16 @@ struct SearchView: View {
             Image(systemName: "person")
                 .tag(TrendingMediaType.person)
         }
+        .onChange(of: trendingMediaType) { _ in searchVM.searchString = "" }
         .pickerStyle(SegmentedPickerStyle())
     }
     
     func search() {
         hideKeyboard()
-        searchVM.searchMovie()
+        if trendingMediaType == .movie {
+            searchVM.searchMovie()
+        } else {
+            searchVM.searchPerson()
+        }
     }
 }

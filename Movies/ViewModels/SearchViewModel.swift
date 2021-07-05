@@ -12,6 +12,7 @@ import Combine
 class SearchViewModel: ObservableObject {
     @Published var searchString = ""
     @Published var searchMovieResults = [SearchMovie.Result]()
+    @Published var searchPersonResults = [SearchPerson.Result]()
     @Published var trendingMovieResults = [SearchMovie.Result]()
     @Published var trendingPersonResults = [SearchPerson.Result]()
     @Published var isLoading = false
@@ -38,6 +39,36 @@ class SearchViewModel: ObservableObject {
                 let decodedSearch = try JSONDecoder().decode(SearchMovie.self, from: data)
                 DispatchQueue.main.async {
                     self.searchMovieResults = decodedSearch.results.filter { $0.posterUrl != nil }
+                }
+            } catch {
+                print("Error decoding search response:", error)
+            }
+            DispatchQueue.main.async {
+                self.isLoading = false
+            }
+        }
+        .resume()
+    }
+    
+    func searchPerson() {
+        let stringURL = Constants.tmdbUrl
+            + "/search/person"
+            + "?api_key=\(Constants.tmdbKey)"
+            + "&query=\(searchString.replacingOccurrences(of: " ", with: "+"))"
+            + "&language=fr"
+            + "&include_adult=false"
+        
+        guard let url = URL(string: stringURL) else { return }
+        
+        isLoading = true
+        
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            guard let data = data else { return }
+            
+            do {
+                let decodedSearch = try JSONDecoder().decode(SearchPerson.self, from: data)
+                DispatchQueue.main.async {
+                    self.searchPersonResults = decodedSearch.results.filter { $0.profileUrl != nil }
                 }
             } catch {
                 print("Error decoding search response:", error)
@@ -93,7 +124,7 @@ class SearchViewModel: ObservableObject {
             do {
                 let decodedSearch = try JSONDecoder().decode(SearchPerson.self, from: data)
                 DispatchQueue.main.async {
-                    self.trendingPersonResults = decodedSearch.results
+                    self.trendingPersonResults = decodedSearch.results.filter { $0.profileUrl != nil }
                 }
             } catch {
                 print("Error decoding trending persons response:", error)

@@ -10,16 +10,32 @@ import Foundation
 import SwiftUI
 import FirebaseFirestore
 import FirebaseFirestoreSwift
+import FirebaseStorage
 
 class User: Identifiable, Equatable, Codable, ObservableObject {
     @DocumentID var id: String?
-    var name, imageUrl: String
+    var name, imagePath: String?
     var entries: [Entry]?
     var buddies: [String]?
+    var imageURL: URL? {
+        guard let imagePath = imagePath else { return nil }
+        return URL(string: imagePath)
+    }
     
     static func == (lhs: User, rhs: User) -> Bool {
         lhs.id == rhs.id
     }
+    
+//    func fetchUserImage() {
+//        guard let id = id else { return }
+//        Storage.storage().reference().child("users/\(id).jpg").downloadURL { url, error in
+//            if let error = error {
+//                print(error.localizedDescription)
+//            } else {
+//                self.imageURL = url
+//            }
+//        }
+//    }
     
 //    func calculateAffinity(with user: User) -> (rank: Int, title: String, color: Color) {
 //        let likes = Set(entries.filter { $0.reaction == .like }.map { $0.movieId })

@@ -10,8 +10,8 @@ import SwiftUI
 import KingfisherSwiftUI
 
 struct MovieView: View {
-    @ObservedObject var movieVM: MovieViewModel
-    @ObservedObject var entriesViewModel = EntryViewModel()
+    @StateObject var movieVM: MovieViewModel
+    @StateObject var entriesViewModel = EntryViewModel()
     
     var body: some View {
         ScrollView {

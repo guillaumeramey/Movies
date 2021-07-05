@@ -11,16 +11,35 @@ import AuthenticationServices
 
 struct UserView: View {
     private let columns: [GridItem] = Array(repeating: .init(.flexible(), spacing: 2), count: 3)
-    @State private var reaction: UserReaction = .like
-    @StateObject var entryListVM = EntryListViewModel()
     @EnvironmentObject var userVM: UserViewModel
+    @StateObject var entryListVM = EntryListViewModel()
+    @State private var reaction: UserReaction = .like
+    @State private var userName = ""
+    @State private var showImagePicker = false
+    @State private var userImage: Image?
+    @State private var inputImage: UIImage?
+    //    @FocusState private var isFocused = false
     
     var body: some View {
         ScrollView {
             ScrollViewReader { reader in
-                if userVM.user != nil {
-                    UserImage(image: userVM.user?.imageUrl ?? "", size: .large)
-                        .padding(.vertical)
+                if let user = userVM.user {
+                    HStack {
+                        UserImage(url: user.imageURL, image: userImage, size: .large)
+                            .onTapGesture {
+                                showImagePicker.toggle()
+                            }
+                        
+                        TextField("Enter your name", text: $userName, onCommit: {
+                            userVM.updateName(newName: userName)
+                        })
+                        .font(.title2)
+                        .keyboardType(.alphabet)
+                        .disableAutocorrection(true)
+                        .padding(.leading)
+                        //                        .focused($isFocused)
+                    }
+                    .padding()
                 } else {
                     SignInWithAppleButton { request in
                         request.requestedScopes = [.email, .fullName]
@@ -45,19 +64,14 @@ struct UserView: View {
                     }
                 }
             }
-            .navigationBarTitle(userVM.user?.name ?? "???", displayMode: .inline)
-            .navigationBarItems(trailing: editButton)
+            .navigationBarTitle("Profil", displayMode: .inline)
         }
         .onAppear(perform: {
             entryListVM.fetchUserEntries(userVM.user)
+            userName = userVM.user?.name ?? ""
         })
-    }
-    
-    var editButton: some View {
-        Button(action: {
-            print("Edit button pressed...")
-        }) {
-            Constants.Images.edit
+        .sheet(isPresented: $showImagePicker, onDismiss: updateImage) {
+            ImagePicker(image: $inputImage)
         }
     }
     
@@ -77,6 +91,12 @@ struct UserView: View {
         .onAppear {
             entryListVM.filterEntries(with: reaction)
         }
+    }
+    
+    func updateImage() {
+        guard let inputImage = inputImage else { return }
+        userImage = Image(uiImage: inputImage)
+        userVM.updateImage(image: inputImage)
     }
 }
 

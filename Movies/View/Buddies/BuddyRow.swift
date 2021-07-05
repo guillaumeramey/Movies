@@ -14,9 +14,9 @@ struct BuddyRow: View {
     
     var body: some View {
         HStack {
-            UserImage(image: buddy.imageUrl, size: .medium)
+            UserImage(url: buddy.imageURL, size: .medium)
             
-            Text(buddy.name)
+            Text(buddy.name ?? "???")
                 .font(.title2)
             
             Spacer()
