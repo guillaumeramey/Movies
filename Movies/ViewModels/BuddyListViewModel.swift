@@ -13,6 +13,7 @@ import FirebaseFirestore
 class BuddyListViewModel: ObservableObject {
     private var db = Firestore.firestore()
     @Published var buddies = [User]()
+    @Published var searchBuddies = [User]()
     
     func fetchBuddies(of user: User?) {
         guard let buddies = user?.buddies else { return }
@@ -34,5 +35,31 @@ class BuddyListViewModel: ObservableObject {
                 }
             }
         }
+    }
+    
+    func fetchAllBuddies() {
+        db.collection("users").getDocuments() { querySnapshot, error in
+            guard error == nil else {
+                print("Error getting buddies:", error?.localizedDescription ?? "")
+                return
+            }
+            
+            guard let documents = querySnapshot?.documents else {
+                print("No buddies found")
+                return
+            }
+            
+            DispatchQueue.main.async {
+                self.searchBuddies = documents.compactMap {
+                    try? $0.data(as: User.self)
+                }
+            }
+        }
+    }
+    
+    func addBuddy(id: String?) {
+        guard let id = id else { return }
+        guard let userId = Auth.auth().currentUser?.uid else { return }
+        db.collection("users").document(userId).updateData(["buddies": FieldValue.arrayUnion([id])])
     }
 }

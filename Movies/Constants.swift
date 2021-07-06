@@ -22,15 +22,12 @@ struct Constants {
             static let search = "Search a movie"
         }
         
-//        struct FeedCalendar {
-//            static let title = "Select a period"
-//            static let lastWeek = "Last week"
-//            static let lastMonth = "Last month"
-//            static let allTimes = "All times"
-//        }
+        struct Search {
+            static let moviePlaceholder = "Search movie"
+            static let personPlaceholder = "Search person"
+            static let buddiesPlaceholder = "Search buddies"
+        }
         
-        static let searchMoviePlaceholder = "Search movie"
-        static let searchPersonPlaceholder = "Search person"
         static let like = "Like"
         static let dislike = "Dislike"
     }
@@ -41,6 +38,14 @@ struct Constants {
             static let search = Image(systemName: "magnifyingglass")
             static let buddies = Image(systemName: "person.3")
             static let currentUser = Image(systemName: "person")
+        }
+        
+        struct Search {
+            struct Picker {
+                static let movie = Image(systemName: "film")
+                static let buddies = Image(systemName: "person.3")
+                static let person = Image(systemName: "person")
+            }
         }
         
         static let like = Image(systemName: "hand.thumbsup")
@@ -54,7 +59,7 @@ struct Constants {
         static let calendar = Image(systemName: "calendar")
         static let add = Image(systemName: "plus.circle")
         static let search = Image(systemName: "magnifyingglass")
-        static let edit = Image(systemName: "pencil")
+        static let options = Image(systemName: "ellipsis")
     }
     
     struct Colors {

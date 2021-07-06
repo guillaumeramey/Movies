@@ -8,14 +8,15 @@
 
 import SwiftUI
 
-enum TrendingMediaType: String, Codable {
+enum SearchType: String, Codable {
     case movie, person
 }
 
 struct SearchView: View {
+    @EnvironmentObject var userVM: UserViewModel
     @StateObject private var searchVM = SearchViewModel()
     @State private var isEditing = false
-    @State private var trendingMediaType: TrendingMediaType = .movie
+    @State private var searchType: SearchType = .movie
     private let columns: [GridItem] = Array(repeating: .init(.flexible(), spacing: 2), count: 3)
     
     var body: some View {
@@ -24,7 +25,7 @@ struct SearchView: View {
                 .padding(.horizontal)
                 .padding(.bottom, 5)
             
-            trendingPicker
+            searchPicker
                 .padding(.horizontal)
                 .padding(.bottom, 5)
             
@@ -32,11 +33,12 @@ struct SearchView: View {
                 if !isEditing {
                     ScrollView {
                         LazyVGrid(columns: columns, spacing: 2) {
-                            if trendingMediaType == .movie {
+                            switch searchType {
+                            case .movie:
                                 ForEach(searchVM.trendingMovieResults) { movie in
                                     MovieCell(movieId: movie.id)
                                 }
-                            } else if trendingMediaType == .person {
+                            case .person:
                                 ForEach(searchVM.trendingPersonResults) { person in
                                     PersonCell(person: person)
                                 }
@@ -47,31 +49,7 @@ struct SearchView: View {
                     Spacer()
                 }
             } else {
-                if trendingMediaType == .movie {
-                    if searchVM.searchMovieResults.isEmpty {
-                        List {
-                            ForEach(0 ..< 5) { _ in
-                                LoadingSearchMovieCell()
-                            }
-                        }
-                    } else {
-                        List(searchVM.searchMovieResults) { movie in
-                            SearchMovieCell(movie: movie)
-                        }
-                    }
-                } else {
-                    if searchVM.searchPersonResults.isEmpty {
-                        List {
-                            ForEach(0 ..< 5) { _ in
-                                LoadingSearchMovieCell()
-                            }
-                        }
-                    } else {
-                        List(searchVM.searchPersonResults) { person in
-                            SearchPersonCell(person: person)
-                        }
-                    }
-                }
+                resultList
             }
         }
         .onAppear(perform: {
@@ -88,14 +66,16 @@ struct SearchView: View {
             ZStack(alignment: .leading) {
                 // manual placeholder to change color
                 if searchVM.searchString.isEmpty {
-                    if trendingMediaType == .movie {
-                        Text(Constants.Text.searchMoviePlaceholder)
+                    switch searchType {
+                    case .movie:
+                        Text(Constants.Text.Search.moviePlaceholder)
                             .foregroundColor(Color(.systemGray))
-                    } else {
-                        Text(Constants.Text.searchPersonPlaceholder)
+                    case .person:
+                        Text(Constants.Text.Search.personPlaceholder)
                             .foregroundColor(Color(.systemGray))
                     }
                 }
+                
                 TextField("", text: $searchVM.searchString, onEditingChanged: { isEditing = $0 }, onCommit: search)
                     .keyboardType(.webSearch)
                     .autocapitalization(.none)
@@ -116,22 +96,55 @@ struct SearchView: View {
         .cornerRadius(6)
     }
     
-    var trendingPicker: some View {
-        Picker(selection: $trendingMediaType, label: Text("Media Type")) {
-            Image(systemName: "film")
-                .tag(TrendingMediaType.movie)
-            Image(systemName: "person")
-                .tag(TrendingMediaType.person)
+    var searchPicker: some View {
+        Picker(selection: $searchType, label: Text("Search type")) {
+            Constants.Images.Search.Picker.movie
+                .tag(SearchType.movie)
+            Constants.Images.Search.Picker.person
+                .tag(SearchType.person)
         }
-        .onChange(of: trendingMediaType) { _ in searchVM.searchString = "" }
+        .onChange(of: searchType) { _ in searchVM.searchString = "" }
         .pickerStyle(SegmentedPickerStyle())
+    }
+    
+    var resultList: some View {
+        HStack {
+            switch searchType {
+            case .movie:
+                if searchVM.searchMovieResults.isEmpty {
+                    List {
+                        ForEach(0 ..< 5) { _ in
+                            LoadingSearchMovieCell()
+                        }
+                    }
+                } else {
+                    List(searchVM.searchMovieResults) { movie in
+                        SearchMovieCell(movie: movie)
+                    }
+                }
+            case .person:
+                if searchVM.searchPersonResults.isEmpty {
+                    List {
+                        ForEach(0 ..< 5) { _ in
+                            LoadingSearchMovieCell()
+                        }
+                    }
+                } else {
+                    List(searchVM.searchPersonResults) { person in
+                        SearchPersonCell(person: person)
+                    }
+                }
+            }
+        }
     }
     
     func search() {
         hideKeyboard()
-        if trendingMediaType == .movie {
+        
+        switch searchType {
+        case .movie:
             searchVM.searchMovie()
-        } else {
+        case .person:
             searchVM.searchPerson()
         }
     }

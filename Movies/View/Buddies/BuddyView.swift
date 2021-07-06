@@ -10,15 +10,15 @@ import SwiftUI
 import AuthenticationServices
 
 struct BuddyView: View {
-    private let columns: [GridItem] = Array(repeating: .init(.flexible(), spacing: 2), count: 3)
-    var buddyVM = BuddyViewModel()
-    @State private var reaction: UserReaction = .like
     @StateObject var entryListVM = EntryListViewModel()
+    @State private var reaction: UserReaction = .like
+    private let columns: [GridItem] = Array(repeating: .init(.flexible(), spacing: 2), count: 3)
+    var buddy = User()
     
     var body: some View {
         ScrollView {
             ScrollViewReader { reader in
-                UserImage(url: buddyVM.buddy?.imageURL, size: .large)
+                UserImage(url: buddy.imageURL, size: .large)
                     .padding(.vertical)
                 
                 reactionPicker
@@ -29,19 +29,19 @@ struct BuddyView: View {
                     }
                 }
             }
-            .navigationBarTitle(buddyVM.buddy?.name ?? "???", displayMode: .inline)
-            .navigationBarItems(trailing: editButton)
+            .navigationBarTitle(buddy.name ?? "", displayMode: .inline)
+            .navigationBarItems(trailing: optionsButton)
         }
         .onAppear(perform: {
-            entryListVM.fetchUserEntries(buddyVM.buddy)
+            entryListVM.fetchUserEntries(buddy)
         })
     }
     
-    var editButton: some View {
+    var optionsButton: some View {
         Button(action: {
-            print("Edit button pressed...")
+            print("Options button pressed...")
         }) {
-            Constants.Images.edit
+            Constants.Images.options
         }
     }
     

@@ -15,16 +15,23 @@ struct PersonView: View {
 
     var body: some View {
         ScrollView {
-            VStack(alignment: .leading) {
-                HStack {
+            ZStack(alignment: .bottomLeading) {
                 KFImage(person.profileUrl)
                     .resizable()
                     .scaledToFit()
                 
-                Text(person.name)
-                    .font(.title)
-                    .fontWeight(.bold)
+                HStack {
+                    Text(person.name)
+                        .font(.title)
+                        .fontWeight(.bold)
+                        .foregroundColor(.white)
+                        .padding()
+                    
+                    Spacer()
                 }
+                .background(
+                    LinearGradient(gradient: Gradient(colors: [.clear, .black]), startPoint: .top, endPoint: .bottom)
+                )
             }
             .padding()
             

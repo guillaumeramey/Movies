@@ -18,7 +18,7 @@ struct AppView: View {
                 .tabItem { Constants.Images.Tab.search}
             
             BuddyListView()
-                .tabItem { Constants.Images.Tab.users }
+                .tabItem { Constants.Images.Tab.buddies }
             
             NavigationView {
                 UserView()

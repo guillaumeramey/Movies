@@ -16,23 +16,11 @@ struct BuddyRow: View {
         HStack {
             UserImage(url: buddy.imageURL, size: .medium)
             
-            Text(buddy.name ?? "???")
+            Text(buddy.name ?? "")
                 .font(.title2)
             
             Spacer()
-            
-//            ReactionImage(reaction: .like, fill: true, font: .callout)
-//            Text("\(user.likesCount)")
-//            
-//            ReactionImage(reaction: .dislike, fill: true, font: .callout)
-//            Text("\(user.dislikesCount)")
         }
         .frame(alignment: .leading)
     }
 }
-
-//struct FriendRow_Previews: PreviewProvider {
-//    static var previews: some View {
-//        FriendRow(user: User(name: "Test", imageUrl: ""))
-//    }
-//}

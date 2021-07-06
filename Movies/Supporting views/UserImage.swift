@@ -37,7 +37,7 @@ struct UserImage: View {
     }
     var url: URL?
     var image: Image?
-    var size: Size = .small
+    var size: Size = .medium
     
     var body: some View {
         if let image = image {

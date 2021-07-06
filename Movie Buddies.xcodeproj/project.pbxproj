@@ -58,6 +58,7 @@
 		A4AEB1092656BC810033F7B3 /* UserImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4AEB1082656BC810033F7B3 /* UserImage.swift */; };
 		A4AEB10B26579C000033F7B3 /* Reactions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4AEB10A26579C000033F7B3 /* Reactions.swift */; };
 		A4BA79CA2693522200F9CE65 /* SearchPersonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4BA79C92693522200F9CE65 /* SearchPersonCell.swift */; };
+		A4BA79CC26944A6700F9CE65 /* SearchBuddyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4BA79CB26944A6700F9CE65 /* SearchBuddyCell.swift */; };
 		A4C62A5D24BCE49E0015092C /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C62A5C24BCE49E0015092C /* Movie.swift */; };
 		A4C62A6324BE094F0015092C /* MovieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C62A6224BE094F0015092C /* MovieView.swift */; };
 		A4C62A6924BE127F0015092C /* SearchData.json in Resources */ = {isa = PBXBuildFile; fileRef = A4C62A6824BE127F0015092C /* SearchData.json */; };
@@ -126,6 +127,7 @@
 		A4AEB1082656BC810033F7B3 /* UserImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserImage.swift; sourceTree = "<group>"; };
 		A4AEB10A26579C000033F7B3 /* Reactions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reactions.swift; sourceTree = "<group>"; };
 		A4BA79C92693522200F9CE65 /* SearchPersonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPersonCell.swift; sourceTree = "<group>"; };
+		A4BA79CB26944A6700F9CE65 /* SearchBuddyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBuddyCell.swift; sourceTree = "<group>"; };
 		A4C62A5C24BCE49E0015092C /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		A4C62A6224BE094F0015092C /* MovieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieView.swift; sourceTree = "<group>"; };
 		A4C62A6824BE127F0015092C /* SearchData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = SearchData.json; sourceTree = "<group>"; };
@@ -280,6 +282,7 @@
 				A411F52524C0CD040031D028 /* BuddyListView.swift */,
 				A411F52924C0D01F0031D028 /* BuddyRow.swift */,
 				A47F48F424C2F24400DC2432 /* BuddyView.swift */,
+				A4BA79CB26944A6700F9CE65 /* SearchBuddyCell.swift */,
 			);
 			path = Buddies;
 			sourceTree = "<group>";
@@ -447,6 +450,7 @@
 				A448DB18265E91B900B707D8 /* SearchMovieCell.swift in Sources */,
 				A448DB06265D0C7000B707D8 /* Entry.swift in Sources */,
 				A48956012666BB7900112953 /* LoadingColor.swift in Sources */,
+				A4BA79CC26944A6700F9CE65 /* SearchBuddyCell.swift in Sources */,
 				A4C62A5D24BCE49E0015092C /* Movie.swift in Sources */,
 				A48956072668C05300112953 /* BuddyViewModel.swift in Sources */,
 				A411F52424C0CA510031D028 /* User.swift in Sources */,
